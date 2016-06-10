@@ -28,6 +28,11 @@ ext {
     gradleWrapperVersion = project.gradleWrapperVersion
 }
 
+assets {
+    minifyJs = true
+    minifyCss = true
+}
+
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
@@ -62,6 +67,7 @@ dependencies {
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
     compile "org.grails.plugins:spring-security-core:3.0.4"
 //    compile "org.grails.plugins:filterpane:3.0.3"
+	compile 'com.github.jsimone:webapp-runner:8.0.30.2'
 }
 
 task wrapper(type: Wrapper) {
@@ -88,7 +94,4 @@ task copyToLib(type: Copy) {
 
 stage.dependsOn(copyToLib)
 
-assets {
-    minifyJs = true
-    minifyCss = true
-}
+
