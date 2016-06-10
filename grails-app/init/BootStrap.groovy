@@ -12,7 +12,10 @@ class BootStrap {
 
     def init = { servletContext ->
         environments {
-            production {}
+            production {
+                createUserRole()
+                createTeam()
+            }
 
             development {
                 createUserRole()
