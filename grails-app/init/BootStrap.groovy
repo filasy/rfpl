@@ -15,6 +15,10 @@ class BootStrap {
             production {
                 createUserRole()
                 createTeam()
+                createRankAndRound()
+                createScore()
+                createGame()
+                createForecast()
             }
 
             development {
