@@ -6,7 +6,6 @@ import secure.User
 class Game {
     @BindingFormat('dd:MM:yyyy HH:mm')
     Date startDate
-    Round round
     Team firstTeam
     Team secondTeam
     Score score
@@ -15,7 +14,6 @@ class Game {
 
     static constraints = {
         startDate nullable: false
-        round nullable: false
         firstTeam nullable: false, unique: ('secondTeam')
         secondTeam nullable: false, unique: ('firstTeam')
         score nullable: true
@@ -28,7 +26,7 @@ class Game {
 
     @Override
     String toString() {
-        round.toString() + ". " + firstTeam.toString() + " - " + secondTeam.toString()
+        firstTeam.toString() + " - " + secondTeam.toString()
     }
 
     int getBallForUser(User user){

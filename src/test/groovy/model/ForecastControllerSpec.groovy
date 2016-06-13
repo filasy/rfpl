@@ -25,7 +25,7 @@ class ForecastControllerSpec extends Specification {
             model.forecastCount == 0
     }
 
-   /* void "Test the create action returns the correct model"() {
+    void "Test the create action returns the correct model"() {
         when:"The create action is executed"
             controller.create()
 
@@ -148,5 +148,5 @@ class ForecastControllerSpec extends Specification {
             Forecast.count() == 0
             response.redirectedUrl == '/forecast/index'
             flash.message != null
-    }*/
+    }
 }

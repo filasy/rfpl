@@ -2,7 +2,6 @@ package secure
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
-import model.Round
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='name', includeNames=true, includePackage=true)
@@ -58,6 +57,11 @@ class User implements Serializable {
 		sort "name"
 	}
 
+	@Override
+	String toString() {
+		this.name;
+	}
+
 	int getBall(){
 		def result = 0
 		Forecast.findAllByUser(this).each {
@@ -65,9 +69,4 @@ class User implements Serializable {
 		}
 		return result
 	}
-
-	int getBall(Round round){
-		return round.getBallForUser(this)
-	}
-
 }

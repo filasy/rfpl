@@ -5,7 +5,6 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class ForecastController {
-    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -19,10 +18,7 @@ class ForecastController {
     }
 
     def create() {
-        def forecast = new Forecast(params)
-        forecast.user = springSecurityService.currentUser
-        forecast.game = Game.get(params.gameID)
-        respond forecast
+        respond new Forecast(params)
     }
 
     @Transactional
