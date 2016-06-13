@@ -1,5 +1,7 @@
 package model
 
+import secure.User
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -7,11 +9,21 @@ import grails.transaction.Transactional
 class GameController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def springSecurityService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Game.list(params), model:[gameCount: Game.count()]
     }
+
+    def showResults(Integer max){
+        if (!params.id) {
+            notFound()
+        }
+        def rank = Rank.get(params.id)
+        return [games: Game.findAllByRank(rank), users: rank.getUsers()]
+    }
+
 
     def show(Game game) {
         respond game

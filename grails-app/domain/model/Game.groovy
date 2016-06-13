@@ -9,6 +9,7 @@ class Game {
     Team firstTeam
     Team secondTeam
     Score score
+    Rank rank
 
     static hasMany = [forecasts: Forecast]
 
@@ -17,6 +18,7 @@ class Game {
         firstTeam nullable: false, unique: ('secondTeam')
         secondTeam nullable: false, unique: ('firstTeam')
         score nullable: true
+        rank nullable: false
     }
 
     static mapping = {

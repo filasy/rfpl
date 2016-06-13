@@ -2,6 +2,9 @@ package secure
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import model.Forecast
+import model.Game
+import model.Rank
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='name', includeNames=true, includePackage=true)
@@ -14,11 +17,13 @@ class User implements Serializable {
 	String username
 	String password
 	String name
-	boolean activityChamp = true
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+
+	static hasMany = [ranks: Rank]
+
 
 	User(String username, String password, String name) {
 		this()
@@ -50,6 +55,7 @@ class User implements Serializable {
 	static constraints = {
 		password blank: false, password: true
 		username blank: false, unique: true
+		name blank: false, unique: true
 	}
 
 	static mapping = {
@@ -68,5 +74,8 @@ class User implements Serializable {
 			result += it.getBall()?: 0
 		}
 		return result
+	}
+
+	int getBallByRank(Rank rank) {
 	}
 }
