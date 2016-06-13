@@ -99,8 +99,9 @@ class BootStrap {
 
 
     void createRankAndRound(){
-        def rank = new Rank(name: "2015-2016").save()
-        assert Rank.count() == 1
+        def rank = new Rank(name: "РФПЛ 2015-2016").save()
+        rank = new Rank(name: "Евро 2016").save()
+        assert Rank.count() == 2
     }
 
     void createScore(){
