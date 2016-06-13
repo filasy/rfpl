@@ -96,20 +96,35 @@ class BootStrap {
         team = new Team(name: "Румыния").save()
         team = new Team(name: "Албания").save()
         team = new Team(name: "Швейцария").save()
+        team = new Team(name: "Уэльс").save()
+        team = new Team(name: "Словакия").save()
+        team = new Team(name: "Англия").save()
+        team = new Team(name: "Россия").save()
+        team = new Team(name: "Турция").save()
+        team = new Team(name: "Хорватия").save()
+        team = new Team(name: "Польша").save()
+        team = new Team(name: "Северная Ирландия").save()
+        team = new Team(name: "Германия").save()
+        team = new Team(name: "Украина").save()
+        team = new Team(name: "Австрия").save()
+        team = new Team(name: "Венгрия").save()
+        team = new Team(name: "Португалия").save()
+        team = new Team(name: "Исландия").save()
 
-        assert Team.count() == 20
+//        assert Team.count() == 20
     }
 
 
     void createRankAndRound(){
-        def rank = new Rank(name: "РФПЛ 2015-2016")
+        def rank = new Rank(name: "РФПЛ 115-2016")
                 .addToUsers(User.findByUsername('pirogov'))
                 .addToUsers(User.findByUsername('admin'))
                 .addToUsers(User.findByUsername('aleksandr'))
                 .save()
         rank = new Rank(name: "Евро 2016")
                 .addToUsers(User.findByUsername('admin'))
-                .addToUsers(User.findByUsername('aleksandr'))
+                .addToUsers(User.findByUsername('pirogov'))
+                .addToUsers(User.findByUsername('evgeny'))
                 .save()
         assert Rank.count() == 2
     }
@@ -134,86 +149,46 @@ class BootStrap {
     }
 
     void createGame(){
-        //Тур1
-        def game = new Game(startDate: new Date(2015,7,17,19,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Спартак"), secondTeam:  Team.findByName("Уфа"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(2,2)).save()
-        game = new Game(startDate: new Date(2015,7,18,18,30), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("ЦСКА"), secondTeam:  Team.findByName("Рубин"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(1,0)).save()
-        game = new Game(startDate: new Date(2015,7,18,21,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Ростов"), secondTeam:  Team.findByName("Терек"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(1,1)).save()
-        game = new Game(startDate: new Date(2015,7,19,13,30), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Зенит"), secondTeam:  Team.findByName("Динамо"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(2,1)).save()
-        game = new Game(startDate: new Date(2015,7,19,18,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Мордовия"), secondTeam:  Team.findByName("Локомотив"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(0,1)).save()
-        game = new Game(startDate: new Date(2015,7,19,21,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Анжи"), secondTeam:  Team.findByName("Крылья Советов"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(0,1)).save()
-        game = new Game(startDate: new Date(2015,7,20,17,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Амкар"), secondTeam:  Team.findByName("Краснодар"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(0,1)).save()
-        game = new Game(startDate: new Date(2015,7,20,20,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Кубань"), secondTeam:  Team.findByName("Урал"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(0,2)).save()
-
-        //Тур2
-        game = new Game(startDate: new Date(2015,7,24,19,0),  rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Крылья Советов"), secondTeam:  Team.findByName("ЦСКА"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(0,2)).save()
-        //Тур3
-        game = new Game(startDate: new Date(2015,7,31,20,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Кубань"), secondTeam:  Team.findByName("Уфа"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(1,1)).save()
-        //Тур4
-        game = new Game(startDate: new Date(2015,8,7,18,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Терек"), secondTeam:  Team.findByName("Мордовия"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(0,0)).save()
-        //Тур5
-        game = new Game(startDate: new Date(2015,8,14,17,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Амкар"), secondTeam:  Team.findByName("Анжи"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(1,1)).save()
-        //Тур6
-        game = new Game(startDate: new Date(2015,8,21,20,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Терек"), secondTeam:  Team.findByName("Динамо"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(1,1)).save()
-        //Тур7
-        game = new Game(startDate: new Date(2015,8,28,17,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Урал"), secondTeam:  Team.findByName("Терек"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(3,3)).save()
-        //Тур8
-        game = new Game(startDate: new Date(2015,9,12,17,0), rank: Rank.findByName("РФПЛ 2015-2016"),
-                firstTeam:  Team.findByName("Амкар"), secondTeam:  Team.findByName("Кубань"),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(1,1)).save()
-        //Тур9
-        game = new Game(startDate: new Date(2015,9,18,19,0), rank: Rank.findByName("РФПЛ 2015-2016"),
+        def game = new Game(startDate: new Date(115,8,18,19,0), rank: Rank.findByName("РФПЛ 115-2016"),
                 firstTeam:  Team.findByName("Ростов"), secondTeam:  Team.findByName("Анжи"),
                 score: Score.findOrSaveByFirstTeamAndSecondTeam(1,0)).save()
-        game = new Game(startDate: new Date(2015,9,19,16,0), rank: Rank.findByName("РФПЛ 2015-2016"),
+        game = new Game(startDate: new Date(115,8,19,16,0), rank: Rank.findByName("РФПЛ 115-2016"),
                 firstTeam:  Team.findByName("Терек"), secondTeam:  Team.findByName("Уфа"),
                 score: Score.findOrSaveByFirstTeamAndSecondTeam(4,1)).save()
         //Ту10
-        game = new Game(startDate: new Date(2015,9,26,14,0), rank: Rank.findByName("РФПЛ 2015-2016"),
+        game = new Game(startDate: new Date(115,8,26,14,0), rank: Rank.findByName("РФПЛ 115-2016"),
                 firstTeam:  Team.findByName("ЦСКА"), secondTeam:  Team.findByName("Локомотив"),
                 score: Score.findOrSaveByFirstTeamAndSecondTeam(1,1)).save()
-        game = new Game(startDate: new Date(2015,9,26,16,30), rank: Rank.findByName("РФПЛ 2015-2016"),
+        game = new Game(startDate: new Date(115,8,26,16,30), rank: Rank.findByName("РФПЛ 115-2016"),
                 firstTeam:  Team.findByName("Анжи"), secondTeam:  Team.findByName("Уфа"),
                 score: Score.findOrSaveByFirstTeamAndSecondTeam(1,1)).save()
         //Ту11
-        game = new Game(startDate: new Date(2015,10,2,17,0), rank: Rank.findByName("РФПЛ 2015-2016"),
+        game = new Game(startDate: new Date(115,9,2,17,0), rank: Rank.findByName("РФПЛ 115-2016"),
                 firstTeam:  Team.findByName("Урал"), secondTeam:  Team.findByName("Крылья Советов")).save()
-        game = new Game(startDate: new Date(2015,10,3,14,30), rank: Rank.findByName("РФПЛ 2015-2016"),
+        game = new Game(startDate: new Date(115,9,3,14,30), rank: Rank.findByName("РФПЛ 115-2016"),
                 firstTeam:  Team.findByName("Мордовия"), secondTeam:  Team.findByName("Спартак")).save()
 
         //Евро
-        game = new Game(startDate: new Date(2016,10,6,22,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,9,6,22,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Франция"), secondTeam:  Team.findByName("Румыния")).save()
-        game = new Game(startDate: new Date(2016,11,6,16,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,10,6,16,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Албания"), secondTeam:  Team.findByName("Швейцария")).save()
-        assert Game.count() == 23
+        game = new Game(startDate: new Date(116,10,6,19,00), rank: Rank.findByName("Евро 2016"),
+                firstTeam:  Team.findByName("Уэльс"), secondTeam:  Team.findByName("Словакия")).save()
+        game = new Game(startDate: new Date(116,10,6,22,00), rank: Rank.findByName("Евро 2016"),
+                firstTeam:  Team.findByName("Англия"), secondTeam:  Team.findByName("Россия")).save()
+        game = new Game(startDate: new Date(116,11,6,16,00), rank: Rank.findByName("Евро 2016"),
+                firstTeam:  Team.findByName("Турция"), secondTeam:  Team.findByName("Хорватия")).save()
+        game = new Game(startDate: new Date(116,11,6,19,00), rank: Rank.findByName("Евро 2016"),
+                firstTeam:  Team.findByName("Польша"), secondTeam:  Team.findByName("Северная Ирландия")).save()
+        game = new Game(startDate: new Date(116,11,6,22,00), rank: Rank.findByName("Евро 2016"),
+                firstTeam:  Team.findByName("Германия"), secondTeam:  Team.findByName("Украина")).save()
+        game = new Game(startDate: new Date(116,14,6,19,00), rank: Rank.findByName("Евро 2016"),
+                firstTeam:  Team.findByName("Австрия"), secondTeam:  Team.findByName("Венгрия")).save()
+        game = new Game(startDate: new Date(116,14,6,22,00), rank: Rank.findByName("Евро 2016"),
+                firstTeam:  Team.findByName("Португалия"), secondTeam:  Team.findByName("Исландия")).save()
+
+//        assert Game.count() == 30
     }
 
     def createForecast(){

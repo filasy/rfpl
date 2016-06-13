@@ -20,9 +20,11 @@
         %{--<g:select name="userID" from="${secure.User.findAll()}" optionKey="id" noSelection="['':'-Все участники-']" value="${selectedUser}"/>--}%
         %{--<g:submitButton name="search" value="Применить"/>--}%
     %{--</g:form>--}%
+    Матчи, начавшиеся до <g:formatDate format="yyyy-MM-dd HH:MM:ss" date="${new Date()}"/>
     <table>
         <thead>
             <tr>
+                <th><g:message code="game.startDate.label" default="Начало"/></th>
                 <th><g:message code="game.label" default="Матч"/></th>
                 <th><g:message code="game.score.label" default="Факт"/></th>
                 <g:each in="${users}" status="i" var="user">
@@ -36,6 +38,7 @@
             <g:each in="${games}" status="i" var="game">
                 <g:set var="forecasts" value="${game.forecasts}"/>
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                    <td>${game.startDate}</td>
                     <td>${game}</td>
                     <td>${game?.score}</td>
                     <g:each in="${users}" status="j" var="user">
