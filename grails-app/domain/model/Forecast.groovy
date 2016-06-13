@@ -19,7 +19,7 @@ class Forecast{
 
     @Override
     String toString() {
-        return score.toString()
+        return score.toString() + " (" + user.toString() + ")"
     }
 
     def getBall() {
