@@ -26,18 +26,20 @@
                 <a class="navbar-brand" href="/#">
                     <i class="fa grails-icon">
                         <asset:image src="grails-cupsonly-logo-white.svg"/>
-                    </i> Тотик
+                    </i> Битва титанов
                 </a>
             </div>
             <sec:ifLoggedIn>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Мои лиги <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <g:each var="rank" in="${model.Rank.findAll()}">
-                            <li><a href="${createLink(controller:'game', action: 'showResults', id: rank.id)}">${rank}</a></li>
-                        </g:each>
-                    </ul>
-                </li>
+                %{--<content tag="nav">--}%
+                 <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Мои лиги <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                            <g:each var="rank" in="${secure.User.get(sec.loggedInUserInfo(field: 'id')).ranks}">
+                                <li><a href="${createLink(controller:'game', action: 'showResults', id: rank.id)}">${rank}</a></li>
+                            </g:each>
+                        </ul>
+                    </li>
+                %{--</content>--}%
             </sec:ifLoggedIn>
             %{--<div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">--}%
                 %{--<ul class="nav navbar-nav navbar-right">--}%

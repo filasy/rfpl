@@ -21,7 +21,7 @@ class GameController {
             notFound()
         }
         def rank = Rank.get(params.id)
-        return [games: Game.findAllByRank(rank), users: rank.getUsers()]
+        return [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()), users: rank.getUsers()]
     }
 
 

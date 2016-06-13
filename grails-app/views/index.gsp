@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Тотик</title>
+    <title>Битва титанов</title>
 
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 </head>
