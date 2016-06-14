@@ -19,7 +19,7 @@ class Rank {
     }
 
     @Override
-    String toString(){
-        name
+    String toString(){        
+		name
     }
 }

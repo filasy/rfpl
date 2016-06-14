@@ -2,6 +2,7 @@ package model
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import secure.User
 
 @Transactional(readOnly = true)
 class RankController {
@@ -34,8 +35,11 @@ class RankController {
             respond rank.errors, view:'create'
             return
         }
-
-        rank.save flush:true
+		
+		params.users.each {						
+			rank.addToUsers(User.get(it))
+		}
+		rank.save flush:true
 
         request.withFormat {
             form multipartForm {
@@ -63,7 +67,16 @@ class RankController {
             respond rank.errors, view:'edit'
             return
         }
-
+		
+		println(params)
+		println("rank.users.size: " + rank.users.size())
+		rank.users.each {
+			println("User in rank:" + it.id)
+		}
+		println("params.users.size: " + params.users.size())
+		params.users.each {						
+			println("User in params:" + it)
+		}
         rank.save flush:true
 
         request.withFormat {
