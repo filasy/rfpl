@@ -110,6 +110,8 @@ class BootStrap {
         team = new Team(name: "Венгрия").save()
         team = new Team(name: "Португалия").save()
         team = new Team(name: "Исландия").save()
+        team = new Team(name: "Бельгия").save()
+        team = new Team(name: "Ирландия").save()
 
 //        assert Team.count() == 20
     }
@@ -169,25 +171,26 @@ class BootStrap {
                 firstTeam:  Team.findByName("Мордовия"), secondTeam:  Team.findByName("Спартак")).save()
 
         //Евро
-        game = new Game(startDate: new Date(116,9,6,22,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,5,10,22,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Франция"), secondTeam:  Team.findByName("Румыния")).save()
-        game = new Game(startDate: new Date(116,10,6,16,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,5,11,16,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Албания"), secondTeam:  Team.findByName("Швейцария")).save()
-        game = new Game(startDate: new Date(116,10,6,19,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,5,11,19,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Уэльс"), secondTeam:  Team.findByName("Словакия")).save()
-        game = new Game(startDate: new Date(116,10,6,22,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,5,11,22,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Англия"), secondTeam:  Team.findByName("Россия")).save()
-        game = new Game(startDate: new Date(116,11,6,16,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,5,12,16,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Турция"), secondTeam:  Team.findByName("Хорватия")).save()
-        game = new Game(startDate: new Date(116,11,6,19,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,5,12,19,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Польша"), secondTeam:  Team.findByName("Северная Ирландия")).save()
-        game = new Game(startDate: new Date(116,11,6,22,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,5,12,22,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Германия"), secondTeam:  Team.findByName("Украина")).save()
-        game = new Game(startDate: new Date(116,14,6,19,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,5,14,19,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Австрия"), secondTeam:  Team.findByName("Венгрия")).save()
-        game = new Game(startDate: new Date(116,14,6,22,00), rank: Rank.findByName("Евро 2016"),
+        game = new Game(startDate: new Date(116,5,14,22,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Португалия"), secondTeam:  Team.findByName("Исландия")).save()
-
+		game = new Game(startDate: new Date(116,5,18,16,00), rank: Rank.findByName("Евро 2016"),
+                firstTeam:  Team.findByName("Бельгия"), secondTeam:  Team.findByName("Ирландия")).save()
 //        assert Game.count() == 30
     }
 
