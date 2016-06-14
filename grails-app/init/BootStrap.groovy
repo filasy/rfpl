@@ -118,7 +118,7 @@ class BootStrap {
 
 
     void createRankAndRound(){
-        def rank = new Rank(name: "РФПЛ 115-2016")
+        def rank = new Rank(name: "РФПЛ 2015-2016")
                 .addToUsers(User.findByUsername('pirogov'))
                 .addToUsers(User.findByUsername('admin'))
                 .addToUsers(User.findByUsername('aleksandr'))
@@ -151,23 +151,23 @@ class BootStrap {
     }
 
     void createGame(){
-        def game = new Game(startDate: new Date(115,8,18,19,0), rank: Rank.findByName("РФПЛ 115-2016"),
+        def game = new Game(startDate: new Date(115,8,18,19,0), rank: Rank.findByName("РФПЛ 2015-2016"),
                 firstTeam:  Team.findByName("Ростов"), secondTeam:  Team.findByName("Анжи"),
                 score: Score.findOrSaveByFirstTeamAndSecondTeam(1,0)).save()
-        game = new Game(startDate: new Date(115,8,19,16,0), rank: Rank.findByName("РФПЛ 115-2016"),
+        game = new Game(startDate: new Date(115,8,19,16,0), rank: Rank.findByName("РФПЛ 2015-2016"),
                 firstTeam:  Team.findByName("Терек"), secondTeam:  Team.findByName("Уфа"),
                 score: Score.findOrSaveByFirstTeamAndSecondTeam(4,1)).save()
         //Ту10
-        game = new Game(startDate: new Date(115,8,26,14,0), rank: Rank.findByName("РФПЛ 115-2016"),
+        game = new Game(startDate: new Date(115,8,26,14,0), rank: Rank.findByName("РФПЛ 2015-2016"),
                 firstTeam:  Team.findByName("ЦСКА"), secondTeam:  Team.findByName("Локомотив"),
                 score: Score.findOrSaveByFirstTeamAndSecondTeam(1,1)).save()
-        game = new Game(startDate: new Date(115,8,26,16,30), rank: Rank.findByName("РФПЛ 115-2016"),
+        game = new Game(startDate: new Date(115,8,26,16,30), rank: Rank.findByName("РФПЛ 2015-2016"),
                 firstTeam:  Team.findByName("Анжи"), secondTeam:  Team.findByName("Уфа"),
                 score: Score.findOrSaveByFirstTeamAndSecondTeam(1,1)).save()
         //Ту11
-        game = new Game(startDate: new Date(115,9,2,17,0), rank: Rank.findByName("РФПЛ 115-2016"),
+        game = new Game(startDate: new Date(115,9,2,17,0), rank: Rank.findByName("РФПЛ 2015-2016"),
                 firstTeam:  Team.findByName("Урал"), secondTeam:  Team.findByName("Крылья Советов")).save()
-        game = new Game(startDate: new Date(115,9,3,14,30), rank: Rank.findByName("РФПЛ 115-2016"),
+        game = new Game(startDate: new Date(115,9,3,14,30), rank: Rank.findByName("РФПЛ 2015-2016"),
                 firstTeam:  Team.findByName("Мордовия"), secondTeam:  Team.findByName("Спартак")).save()
 
         //Евро
