@@ -62,12 +62,13 @@ dependencies {
     profile "org.grails.profiles:web:3.1.4"
     runtime "org.grails.plugins:asset-pipeline"
     runtime "com.h2database:h2"
-	runtime "mysql:mysql-connector-java:6.0.2"
+	runtime "mysql:mysql-connector-java:5.1.36"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
-    compile "org.grails.plugins:spring-security-core:3.0.4"
+    compile "org.grails.plugins:spring-security-core:3.1.1"
+//    compile "org.grails.plugins:spring-security-ui:3.0.0.M2"
 //    compile "org.grails.plugins:filterpane:3.0.3"
 	compile 'com.github.jsimone:webapp-runner:8.0.30.2'
 }

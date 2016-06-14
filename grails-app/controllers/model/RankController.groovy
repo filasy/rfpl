@@ -67,16 +67,12 @@ class RankController {
             respond rank.errors, view:'edit'
             return
         }
-		
-		println(params)
-		println("rank.users.size: " + rank.users.size())
-		rank.users.each {
-			println("User in rank:" + it.id)
-		}
-		println("params.users.size: " + params.users.size())
-		params.users.each {						
-			println("User in params:" + it)
-		}
+
+        rank.users.clear();
+        params.users.each {
+            println "Params user: " + User.get(it)
+            rank.addToUsers(User.get(it))
+        }
         rank.save flush:true
 
         request.withFormat {
