@@ -77,5 +77,13 @@ class User implements Serializable {
 	}
 
 	int getBallByRank(Rank rank) {
+		def result = 0
+		def f = Forecast.find {
+			(it.user.id == user.id) && (it.game.rank.id == rank.id)
+		}
+		f.each {
+			result += it.getBall()?: 0
+		}
+		return result
 	}
 }

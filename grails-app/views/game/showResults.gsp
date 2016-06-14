@@ -25,7 +25,7 @@
                 <th><g:message code="game.score.label" default="Факт"/></th>
                 <g:each in="${users}" status="i" var="user">
                     <th>${user.name}
-                      (${user.getBall()})
+                      (${user?.getBall()})
                     </th>
                 </g:each>
             </tr>
