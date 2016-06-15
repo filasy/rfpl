@@ -13,8 +13,12 @@ class GameController {
     def springSecurityService
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Game.list(params), model:[gameCount: Game.count()]
+	params.max = Math.min(max ?: 10, 100)
+		def nowDate	= new Date()
+		def startDate = nowDate - 7
+		def endDate = nowDate + 7		
+        respond Game.findAllByStartDateBetween(startDate, endDate, params), model:[gameCount: Game.findAllByStartDateBetween(startDate, endDate).size(),
+		startDate: startDate, endDate: endDate]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
