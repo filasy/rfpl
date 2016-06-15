@@ -1,10 +1,12 @@
 package model
 
 import static org.springframework.http.HttpStatus.*
+import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 import secure.User
 
 @Transactional(readOnly = true)
+@Secured('ROLE_ADMIN')
 class RankController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

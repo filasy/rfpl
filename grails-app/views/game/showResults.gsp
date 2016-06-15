@@ -17,6 +17,7 @@
 
 <div id="list-game" class="content scaffold-list" role="main">
 	Матчи, начавшиеся до <g:formatDate formatName="default.date.format" date="${new Date()}"/>
+	<div style='overflow:auto'>
     <table>
         <thead>
             <tr>
@@ -44,6 +45,7 @@
             </g:each>
         </tbody>
     </table>
+	</div>	
     %{--<div class="pagination">--}%
         %{--<g:paginate total="${countGames ?: 0}"/>--}%
     %{--</div>--}%

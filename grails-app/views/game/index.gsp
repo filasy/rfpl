@@ -19,8 +19,8 @@
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
 			Матчи с: <g:formatDate formatName="default.date.format" date="${startDate}"/>
-			по: <g:formatDate formatName="default.date.format" date="${endDate}"/>
-            <f:table collection="${gameList}" template="table1"/>
+			по: <g:formatDate formatName="default.date.format" date="${endDate}"/>			
+				<f:table collection="${gameList}"/>		
             <div class="pagination">
                 <g:paginate total="${gameCount ?: 0}" />
             </div>
