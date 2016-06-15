@@ -4,7 +4,6 @@ import org.grails.databinding.BindingFormat
 import secure.User
 
 class Game {
-    @BindingFormat('dd:MM:yyyy HH:mm')
     Date startDate
     Team firstTeam
     Team secondTeam

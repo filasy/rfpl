@@ -5,7 +5,7 @@ import secure.User
 class Rank implements Comparable{
     String name;
 	Date dateCreated = new Date()
-    Date lastUpdated = new Date()
+    Date lastUpdated
     boolean enabled = true
 
     static belongsTo  = User
@@ -27,6 +27,6 @@ class Rank implements Comparable{
 	
 	//@Override
 	int compareTo(obj) {
-        this.dateCreated.compareTo(obj.dateCreated)
+        this.name.compareTo(obj.name)
     }
 }

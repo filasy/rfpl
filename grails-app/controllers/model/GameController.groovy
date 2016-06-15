@@ -12,13 +12,14 @@ class GameController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
     def springSecurityService
 
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def index(Integer max) {
 	params.max = Math.min(max ?: 10, 100)
 		def nowDate	= new Date()
 		def startDate = nowDate - 7
 		def endDate = nowDate + 7		
         respond Game.findAllByStartDateBetween(startDate, endDate, params), model:[gameCount: Game.findAllByStartDateBetween(startDate, endDate).size(),
-		startDate: startDate, endDate: endDate]
+		startDate: startDate, endDate: endDate, user: getAuthenticatedUser()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -30,7 +31,7 @@ class GameController {
         return [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()), users: rank.getUsers(), rank: rank]
     }
 
-
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def show(Game game) {
         respond game
     }

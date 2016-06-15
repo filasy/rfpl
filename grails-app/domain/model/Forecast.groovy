@@ -7,8 +7,6 @@ class Forecast{
     Score score
     Date dateCreated
     Date lastUpdated
-    boolean locked = false
-
 
     static belongsTo = [game: Game]
 
