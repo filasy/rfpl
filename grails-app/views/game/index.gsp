@@ -19,13 +19,9 @@
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
             <g:form action="index" class="message">
-                <g:datePicker id="date" name="date" value="${date}" default="${new Date()}" precision="day" years="${2016..2018}" >123</g:datePicker>
+                <g:datePicker id="date" name="date" value="${date}" default="${new Date()}" precision="day" years="${2015..2017}" >123</g:datePicker>
                 <g:submitButton name="search" value="Найти"/>
             </g:form>
-            <div class="message">
-                Отобраны матчи с: <g:formatDate formatName="default.date.format" date="${date-7}"/>
-                по: <g:formatDate formatName="default.date.format" date="${date+7}"/>
-            </div>
             <div class="scrollable">
                 <table>
                     <thread>
