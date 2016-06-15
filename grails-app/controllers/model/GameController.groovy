@@ -18,7 +18,6 @@ class GameController {
         def date = params.date ?: new Date()
         def startDate = date - 7
         def endDate = date + 7
-        flash.message = message(code: 'game.index.filter', args: [startDate, endDate])
         respond Game.findAllByStartDateBetween(startDate, endDate, params), model:[gameCount: Game.findAllByStartDateBetween(startDate, endDate).size(),
 		date: date, user: getAuthenticatedUser()]
     }

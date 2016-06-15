@@ -1,9 +1,12 @@
 package model
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
+@Secured('ROLE_ADMIN')
 class ForecastController {
 	def springSecurityService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -16,12 +19,13 @@ class ForecastController {
     def show(Forecast forecast) {
         respond forecast
     }
-
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def create() {
         respond new Forecast(params)
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def save(Forecast forecast) {
         if (forecast == null) {
             transactionStatus.setRollbackOnly()
@@ -29,8 +33,15 @@ class ForecastController {
             return
         }
 
-        if (forecast.hasErrors()) {
+        if (forecast.hasErrors() ) {
             transactionStatus.setRollbackOnly()
+            respond forecast.errors, view:'create'
+            return
+        }
+
+        if (forecast.user.id != getAuthenticatedUser().id){
+            transactionStatus.setRollbackOnly()
+            flash.message = message(code: 'forecast.error.wrongUser', args: forecast.user)
             respond forecast.errors, view:'create'
             return
         }
@@ -45,12 +56,13 @@ class ForecastController {
             '*' { respond forecast, [status: CREATED] }
         }
     }
-
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def edit(Forecast forecast) {
         respond forecast
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def update(Forecast forecast) {
         if (forecast == null) {
             transactionStatus.setRollbackOnly()
@@ -60,6 +72,13 @@ class ForecastController {
 
         if (forecast.hasErrors()) {
             transactionStatus.setRollbackOnly()
+            respond forecast.errors, view:'edit'
+            return
+        }
+
+        if (forecast.user.id != getAuthenticatedUser().id){
+            transactionStatus.setRollbackOnly()
+            flash.message = message(code: 'forecast.error.wrongUser', args: forecast.user)
             respond forecast.errors, view:'edit'
             return
         }
@@ -76,6 +95,7 @@ class ForecastController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def delete(Forecast forecast) {
 
         if (forecast == null) {

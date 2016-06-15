@@ -19,7 +19,11 @@
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
             <g:form action="index" class="message">
-                <g:datePicker id="date" name="date" value="${date}" default="${new Date()}" precision="day" years="${2015..2017}" >123</g:datePicker>
+                <g:datePicker id="date" name="date"
+                              value="${date}"
+                              default="${new Date()}"
+                              precision="day"
+                              years="${2015..2017}"/>
                 <g:submitButton name="search" value="Найти"/>
             </g:form>
             <div class="scrollable">
@@ -28,7 +32,7 @@
                         <tr>
                             <g:sortableColumn property="startDate" title="${message(code: 'game.startDate.label', default: 'Дата')}" />
                             <th><g:message code="game.label" default="Матч" /></th>
-                            <g:sortableColumn property="forecasts" title="${message(code: 'game.forecasts.label', default: 'Прогнозы')}" />
+                            <th><g:message code="game.forecasts.label" default="Прогнозы" /></th>
                             <g:sortableColumn property="score" title="${message(code: 'game.score.label', default: 'Факт')}" />
                         </tr>
                     </thread>
