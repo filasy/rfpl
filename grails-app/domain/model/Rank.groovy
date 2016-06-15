@@ -2,8 +2,10 @@ package model
 
 import secure.User
 
-class Rank {
+class Rank implements Comparable{
     String name;
+	Date dateCreated = new Date()
+    Date lastUpdated = new Date()
     boolean enabled = true
 
     static belongsTo  = User
@@ -21,5 +23,10 @@ class Rank {
     @Override
     String toString(){        
 		name
+    }
+	
+	//@Override
+	int compareTo(obj) {
+        this.dateCreated.compareTo(obj.dateCreated)
     }
 }

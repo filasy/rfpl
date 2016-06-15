@@ -21,7 +21,8 @@ class User implements Serializable {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-
+	
+	SortedSet ranks
 	static hasMany = [ranks: Rank]
 
 
