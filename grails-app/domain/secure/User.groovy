@@ -8,7 +8,7 @@ import model.Rank
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='name', includeNames=true, includePackage=true)
-class User implements Serializable {
+class User implements Serializable, Comparable {
 
 	private static final long serialVersionUID = 1
 
@@ -61,12 +61,17 @@ class User implements Serializable {
 
 	static mapping = {
 		password column: '`password`'
-		sort "name"
+		sort name: "asc"
 	}
 
 	@Override
 	String toString() {
 		this.name;
+	}
+
+	@Override
+	int compareTo(obj) {
+		this.name.compareTo(obj.name)
 	}
 
 	int getBall(){

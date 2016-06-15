@@ -14,10 +14,10 @@ class Game {
 
     static constraints = {
         startDate nullable: false
-        firstTeam nullable: false, unique: ('secondTeam')
-        secondTeam nullable: false, unique: ('firstTeam')
+        firstTeam nullable: false, unique: (['secondTeam','rank'])
+        secondTeam nullable: false, unique: (['firstTeam','rank'])
         score nullable: true
-        rank nullable: false
+        rank nullable: false, unique: (['firstTeam','secondTeam'])
     }
 
     static mapping = {

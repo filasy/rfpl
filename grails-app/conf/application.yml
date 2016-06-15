@@ -21,7 +21,7 @@ environments:
 #            pooled: true
 #            logSql: true
 #            format_sql: true
-            dbCreate: create-drop
+            dbCreate: update
             url: jdbc:Mysql://localhost:3306/sport
             driverClassName: com.mysql.jdbc.Driver
             dialect: org.hibernate.dialect.MySQL5InnoDBDialect

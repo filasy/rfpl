@@ -22,12 +22,12 @@ class BootStrap {
             }
 
             development {
-                createUserRole()
-                createTeam()
-                createRankAndRound()
-                createScore()
-                createGame()
-                createForecast()
+//                createUserRole()
+//                createTeam()
+//                createRankAndRound()
+//                createScore()
+//                createGame()
+//                createForecast()
             }
 
             test {}

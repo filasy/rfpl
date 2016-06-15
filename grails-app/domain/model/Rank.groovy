@@ -7,6 +7,7 @@ class Rank implements Comparable{
 	Date dateCreated = new Date()
     Date lastUpdated
     boolean enabled = true
+    SortedSet users
 
     static belongsTo  = User
     static hasMany = [users: User]
@@ -25,7 +26,7 @@ class Rank implements Comparable{
 		name
     }
 	
-	//@Override
+	@Override
 	int compareTo(obj) {
         this.name.compareTo(obj.name)
     }

@@ -14,12 +14,12 @@ class GameController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def index(Integer max) {
-	params.max = Math.min(max ?: 10, 100)
-		def nowDate	= new Date()
-		def startDate = nowDate - 7
-		def endDate = nowDate + 7		
+	    params.max = Math.min(max ?: 10, 100)
+        def date = params.date ?: new Date()
+        def startDate = date - 7
+        def endDate = date + 7
         respond Game.findAllByStartDateBetween(startDate, endDate, params), model:[gameCount: Game.findAllByStartDateBetween(startDate, endDate).size(),
-		startDate: startDate, endDate: endDate, user: getAuthenticatedUser()]
+		date: date, user: getAuthenticatedUser()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
