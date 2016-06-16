@@ -49,6 +49,14 @@ class ForecastController {
             respond forecast.errors, view:'create'
             return
         }
+		
+		if (forecast.game.startDate <= new Date()
+			&& !getAuthenticatedUser().isAdmin()){
+			transactionStatus.setRollbackOnly()
+			flash.message = message(code: 'forecast.error.wrongGame', args: forecast.game)
+            respond forecast.errors, view:'create'
+            return
+		}
 
         forecast.save flush:true
 
