@@ -43,15 +43,14 @@ class ForecastController {
             return
         }
 
-        if (forecast.user.id != getAuthenticatedUser().id && !getAuthenticatedUser().isAdmin()){
+        if (notCurrentUser(forecast)){
             transactionStatus.setRollbackOnly()
             flash.message = message(code: 'forecast.error.wrongUser', args: forecast.user)
             respond forecast.errors, view:'create'
             return
         }
 		
-		if (forecast.game.startDate <= new Date()
-			&& !getAuthenticatedUser().isAdmin()){
+		if (timeIsOver(forecast)){
 			transactionStatus.setRollbackOnly()
 			flash.message = message(code: 'forecast.error.wrongGame', args: forecast.game)
             respond forecast.errors, view:'create'
@@ -88,9 +87,16 @@ class ForecastController {
             return
         }
 
-        if (forecast.user.id != getAuthenticatedUser().id && !getAuthenticatedUser().isAdmin()){
+        if (notCurrentUser(forecast)){
             transactionStatus.setRollbackOnly()
             flash.message = message(code: 'forecast.error.wrongUser', args: forecast.user)
+            respond forecast.errors, view:'edit'
+            return
+        }
+
+        if (timeIsOver(forecast)){
+            transactionStatus.setRollbackOnly()
+            flash.message = message(code: 'forecast.error.wrongGame', args: forecast.game)
             respond forecast.errors, view:'edit'
             return
         }
@@ -116,7 +122,7 @@ class ForecastController {
             return
         }
 
-        if (forecast.user.id != getAuthenticatedUser().id && !getAuthenticatedUser().isAdmin()){
+        if (notCurrentUser(forecast)){
             transactionStatus.setRollbackOnly()
             flash.message = message(code: 'forecast.error.wrongUser', args: forecast.user)
             return
@@ -141,5 +147,13 @@ class ForecastController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    private boolean timeIsOver(Forecast forecast) {
+        return  forecast.game.startDate <= new Date() && !getAuthenticatedUser().isAdmin()
+    }
+
+    private boolean notCurrentUser(Forecast forecast) {
+        return forecast.user.id != getAuthenticatedUser().id && !getAuthenticatedUser().isAdmin()
     }
 }
