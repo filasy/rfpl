@@ -11,7 +11,7 @@ class Forecast implements Comparable{
     static belongsTo = [game: Game]
 
     static constraints = {
-        user nullable: false
+        user nullable: false, unique: ('game')
         game nullable: false, unique: ('user')
     }
 
