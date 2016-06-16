@@ -49,7 +49,7 @@
                                     <g:link method="GET" resource="${forecast}">${forecast?.score}</g:link>
                                 </g:elseif>
                                 <g:else>
-                                    <g:link controller="forecast" action="create" params="[gameID: game.id]">Добавить</g:link>
+                                    <g:link controller="forecast" action="create" params="['game.id': game.id, 'user.id':user.id]">Добавить</g:link>
                                 </g:else>
                             </td>
                             <td>

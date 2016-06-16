@@ -18,7 +18,6 @@
         <g:message code="game.showResult.label" args="[rank]"/>
         (<g:message code="game.showResult.infoMessage" args="${new Date()}"/>)
     </h1>
-	%{--<div style="overflow: auto">--}%
     <div class="scrollable">
         <table>
             <thead>
