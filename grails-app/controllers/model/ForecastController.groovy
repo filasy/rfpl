@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-@Secured('ROLE_ADMIN')
+@Secured(['ROLE_ADMIN','ROLE_USER'])
 class ForecastController {
 	def springSecurityService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -23,13 +23,12 @@ class ForecastController {
         }
         respond forecast
     }
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
+
     def create() {
         respond new Forecast(params)
     }
 
     @Transactional
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def save(Forecast forecast) {
         if (forecast == null) {
             transactionStatus.setRollbackOnly()
@@ -67,13 +66,11 @@ class ForecastController {
             '*' { respond forecast, [status: CREATED] }
         }
     }
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def edit(Forecast forecast) {
         respond forecast
     }
 
     @Transactional
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def update(Forecast forecast) {
         if (forecast == null) {
             transactionStatus.setRollbackOnly()
@@ -113,7 +110,6 @@ class ForecastController {
     }
 
     @Transactional
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def delete(Forecast forecast) {
 
         if (forecast == null) {

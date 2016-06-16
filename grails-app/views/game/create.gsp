@@ -10,7 +10,6 @@
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
             </ul>
         </div>
         <div id="create-game" class="content scaffold-create" role="main">
@@ -27,7 +26,43 @@
             </g:hasErrors>
             <g:form action="save">
                 <fieldset class="form">
-                    <f:all bean="game"/>
+                    <div class="fieldcontain ${hasErrors(bean: game, field: 'rank', 'error')} ">
+                        <label for="rank">
+                            <g:message code="game.rank.label" default="Rank" />
+                        </label>
+                        <g:select id="rank" name="rank.id" from="${model.Rank.findAllByEnabled(true)}" optionKey="id" value="${game?.rank?.id}" class="many-to-one"/>
+                    </div>
+
+                    <div class="fieldcontain ${hasErrors(bean: game, field: 'firstTeam', 'error')} required">
+                        <label for="firstTeam">
+                            <g:message code="game.firstTeam.label" default="First Team" />
+                            <span class="required-indicator">*</span>
+                        </label>
+                        <g:select id="firstTeam" name="firstTeam.id" from="${model.Team.list()}" optionKey="id" required="" value="${game?.firstTeam?.id}" class="many-to-one"/>
+                    </div>
+
+                    <div class="fieldcontain ${hasErrors(bean: game, field: 'secondTeam', 'error')} required">
+                        <label for="secondTeam">
+                            <g:message code="game.secondTeam.label" default="Second Team" />
+                            <span class="required-indicator">*</span>
+                        </label>
+                        <g:select id="secondTeam" name="secondTeam.id" from="${model.Team.list()}" optionKey="id" required="" value="${game?.secondTeam?.id}" class="many-to-one"/>
+                    </div>
+                    <div class="fieldcontain ${hasErrors(bean: game, field: 'startDate', 'error')} required">
+                        <label for="startDate">
+                            <g:message code="game.startDate.label" default="Start Date" />
+                            <span class="required-indicator">*</span>
+                        </label>
+                        <g:datePicker name="startDate" precision="minute"  value="${game?.startDate}"  />
+                    </div>
+                    <div class="fieldcontain ${hasErrors(bean: game, field: 'score', 'error')} ">
+                        <label for="score">
+                            <g:message code="game.score.label" default="Score" />
+                        </label>
+                        <g:select id="score" name="score.id" from="${model.Score.list()}" optionKey="id" value="${game?.score?.id}" class="many-to-one" noSelection="['null': '']"/>
+                    </div>
+
+                    %{--<f:all bean="game"/>--}%
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

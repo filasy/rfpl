@@ -37,11 +37,13 @@ class GameController {
         respond game
     }
 
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def create() {
         respond new Game(params)
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def save(Game game) {
         if (game == null) {
             transactionStatus.setRollbackOnly()
@@ -51,6 +53,13 @@ class GameController {
 
         if (game.hasErrors()) {
             transactionStatus.setRollbackOnly()
+            respond game.errors, view:'create'
+            return
+        }
+
+        if (!game?.rank?.enabled) {
+            transactionStatus.setRollbackOnly()
+            lash.message = message(code: 'game.error.rankDisabled', args: message(code: 'game.label', default: 'Game'))
             respond game.errors, view:'create'
             return
         }
