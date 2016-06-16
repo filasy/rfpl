@@ -47,7 +47,7 @@
                     <li class="fieldcontain">
                     <span id="forecasts-label" class="property-label"><g:message code="game.forecasts.label" default="Score" /></span>
                         <g:each in="${game?.forecasts}" var="forecast" status="i" >
-                                <span class="property-value" aria-labelledby="forecast${i}-label"><g:link controller="forecast" action="show" id="${forecast.id}">${forecast.encodeAsHTML()}</g:link></span>
+                                <span class="property-value" aria-labelledby="forecast${i}-label">${forecast.encodeAsHTML()}</span>
                         </g:each>
                     </li>
                 </g:if>
