@@ -11,6 +11,7 @@ class ForecastController {
 	def springSecurityService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured('ROLE_ADMIN')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Forecast.list(params), model:[forecastCount: Forecast.count()]
@@ -60,10 +61,10 @@ class ForecastController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'forecast.label', default: 'Forecast'), forecast.id])
-                redirect forecast
+                flash.message = message(code: 'forecast.message.create', args: [forecast.score, getAuthenticatedUser() ,forecast.game])
+                redirect controller: "game", action:"index", method:"GET"
             }
-            '*' { respond forecast, [status: CREATED] }
+            '*'{ respond forecast, [status: OK] }
         }
     }
     def edit(Forecast forecast) {
@@ -102,8 +103,8 @@ class ForecastController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'forecast.label', default: 'Forecast'), forecast.id])
-                redirect forecast
+                flash.message = message(code: 'forecast.message.update', args: [forecast.score, getAuthenticatedUser() ,forecast.game])
+                redirect controller: "game", action:"index", method:"GET"
             }
             '*'{ respond forecast, [status: OK] }
         }
@@ -128,8 +129,8 @@ class ForecastController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'forecast.label', default: 'Forecast'), forecast.id])
-                redirect action:"index", method:"GET"
+                flash.message = message(code: 'forecast.message.delete', args: [forecast.score, getAuthenticatedUser() ,forecast.game])
+                redirect controller: "game", action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }
