@@ -13,12 +13,12 @@ class BootStrap {
     def init = { servletContext ->
         environments {
             production {
-//                createUserRole()
-//                createTeam()
-//                createRankAndRound()
-//                createScore()
-//                createGame()
-//                createForecast()
+                createUserRole()
+                createTeam()
+                createRankAndRound()
+                createScore()
+                createGame()
+                createForecast()
             }
 
             development {
