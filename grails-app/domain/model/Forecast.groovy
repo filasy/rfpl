@@ -2,7 +2,7 @@ package model
 
 import secure.User
 
-class Forecast{
+class Forecast implements Comparable{
     User user
     Score score
     Date dateCreated
@@ -18,6 +18,11 @@ class Forecast{
     @Override
     String toString() {
         return score.toString() + " (" + user.toString() + ")"
+    }
+
+    @Override
+    int compareTo(obj) {
+        this.user.compareTo(obj.user)
     }
 
     def getBall() {

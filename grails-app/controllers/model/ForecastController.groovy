@@ -17,6 +17,10 @@ class ForecastController {
     }
 
     def show(Forecast forecast) {
+        if (forecast.user.id != getAuthenticatedUser().id && !getAuthenticatedUser().isAdmin()){
+            flash.message = message(code: 'springSecurity.denied.message')
+            return
+        }
         respond forecast
     }
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -39,7 +43,7 @@ class ForecastController {
             return
         }
 
-        if (forecast.user.id != getAuthenticatedUser().id){
+        if (forecast.user.id != getAuthenticatedUser().id && !getAuthenticatedUser().isAdmin()){
             transactionStatus.setRollbackOnly()
             flash.message = message(code: 'forecast.error.wrongUser', args: forecast.user)
             respond forecast.errors, view:'create'
@@ -76,7 +80,7 @@ class ForecastController {
             return
         }
 
-        if (forecast.user.id != getAuthenticatedUser().id){
+        if (forecast.user.id != getAuthenticatedUser().id && !getAuthenticatedUser().isAdmin()){
             transactionStatus.setRollbackOnly()
             flash.message = message(code: 'forecast.error.wrongUser', args: forecast.user)
             respond forecast.errors, view:'edit'
@@ -101,6 +105,12 @@ class ForecastController {
         if (forecast == null) {
             transactionStatus.setRollbackOnly()
             notFound()
+            return
+        }
+
+        if (forecast.user.id != getAuthenticatedUser().id && !getAuthenticatedUser().isAdmin()){
+            transactionStatus.setRollbackOnly()
+            flash.message = message(code: 'forecast.error.wrongUser', args: forecast.user)
             return
         }
 

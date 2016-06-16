@@ -37,6 +37,10 @@ class User implements Serializable, Comparable {
 		UserRole.findAllByUser(this)*.role
 	}
 
+	boolean isAdmin(){
+		return  UserRole.findByUserAndRole(this, Role.findByAuthority("ROLE_ADMIN")) != null
+	}
+
 	def beforeInsert() {
 		encodePassword()
 	}

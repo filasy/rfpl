@@ -18,17 +18,18 @@ class GameController {
         def date = params.date ?: new Date()
         def startDate = date - 7
         def endDate = date + 7
-        respond Game.findAllByStartDateBetween(startDate, endDate, params), model:[gameCount: Game.findAllByStartDateBetween(startDate, endDate).size(),
+        respond Game.findAllByStartDateBetween(startDate, endDate, params),
+                model:[gameCount: Game.findAllByStartDateBetween(startDate, endDate).size(),
 		date: date, user: getAuthenticatedUser()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def showResults(Integer max){
-        if (!params.id) {
+        def rank = Rank.get(params.id)
+        if (rank == null) {
             notFound()
         }
-        def rank = Rank.get(params.id)
-        return [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()), users: rank.getUsers(), rank: rank]
+        return [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()), users: rank?.getUsers(), rank: rank]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])

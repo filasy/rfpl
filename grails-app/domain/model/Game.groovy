@@ -9,7 +9,7 @@ class Game {
     Team secondTeam
     Score score
     Rank rank
-
+    SortedSet forecasts
     static hasMany = [forecasts: Forecast]
 
     static constraints = {

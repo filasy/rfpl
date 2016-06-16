@@ -9,6 +9,11 @@ class Score implements Comparable <Score> {
         secondTeam  blank: false, nullable: false
     }
 
+    static mapping = {
+        password column: '`password`'
+        sort firstTeam: "asc", secondTeam: "asc"
+    }
+
     @Override
     String toString(){
         firstTeam + ":" + secondTeam

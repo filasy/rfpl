@@ -3,10 +3,8 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'game.label', default: 'Game')}"/>
-    <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <title><g:message code="game.showResult.label" args="[rank]"/></title>
 </head>
-
 <body>
 <a href="#list-game" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 <div class="nav" role="navigation">
@@ -16,8 +14,12 @@
 </div>
 
 <div id="list-game" class="content scaffold-list" role="main">
-	Матчи, начавшиеся до <g:formatDate formatName="default.date.format" date="${new Date()}"/>
-	<div calss="scrollable">
+    <h1>
+        <g:message code="game.showResult.label" args="[rank]"/>
+        (<g:message code="game.showResult.infoMessage" args="${new Date()}"/>)
+    </h1>
+	%{--<div style="overflow: auto">--}%
+    <div class="scrollable">
         <table>
             <thead>
                 <tr>
@@ -25,7 +27,7 @@
                     <th><g:message code="game.label" default="Матч"/></th>
                     <th><g:message code="game.score.label" default="Факт"/></th>
                     <g:each in="${users}" status="i" var="user">
-                        <th>${user.name} (${user?.getBallByRank(rank)})
+                        <th>${user} (${user?.getBallByRank(rank)})
                         </th>
                     </g:each>
                 </tr>
@@ -35,7 +37,7 @@
                     <g:set var="forecasts" value="${game.forecasts}"/>
                     <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                         <td><g:formatDate formatName="default.date.format" date="${game.startDate}"/></td>
-                        <td>${game}</td>
+                        <td><g:link method="GET" resource="${game}">${game}</g:link></td>
                         <td>${game?.score}</td>
                         <g:each in="${users}" status="j" var="user">
                             <g:set var="forecast" value="${forecasts?.find {it.user.id == user.id}}"/>

@@ -40,7 +40,7 @@
                     <g:each in="${gameList}" var="game" status="i">
                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                             <td><g:formatDate formatName="default.date.format" date="${game?.startDate}"/></td>
-                            <td><g:link method="GET" resource="${game}">${fieldValue(bean: game, field: "firstTeam")} - ${fieldValue(bean: game, field: "secondTeam")}</g:link></td>
+                            <td><g:link method="GET" resource="${game}">${game}</g:link></td>
                             <td>
                                 <g:set var="forecast" value="${game.forecasts.find {it.user == user}}"/>
                                 <g:if test="${game?.startDate <= new Date()}">

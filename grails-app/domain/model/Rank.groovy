@@ -23,11 +23,11 @@ class Rank implements Comparable{
 
     @Override
     String toString(){        
-		name
+		name?.toUpperCase()
     }
 	
 	@Override
 	int compareTo(obj) {
-        this.name.compareTo(obj.name)
+        this.dateCreated.compareTo(obj.dateCreated)
     }
 }
