@@ -51,6 +51,7 @@
                         </g:each>
                     </li>
                 </g:if>
+
             </ol>
             %{--<f:display bean="game" />--}%
             <g:form resource="${this.game}" method="DELETE">

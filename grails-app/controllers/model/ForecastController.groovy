@@ -61,7 +61,7 @@ class ForecastController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'forecast.message.create', args: [forecast.score, getAuthenticatedUser() ,forecast.game])
+                flash.message = message(code: 'forecast.message.create', args: [forecast.score ,forecast.game])
                 redirect controller: "game", action:"index", method:"GET"
             }
             '*'{ respond forecast, [status: OK] }
@@ -103,7 +103,7 @@ class ForecastController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'forecast.message.update', args: [forecast.score, getAuthenticatedUser() ,forecast.game])
+                flash.message = message(code: 'forecast.message.update', args: [forecast.score ,forecast.game])
                 redirect controller: "game", action:"index", method:"GET"
             }
             '*'{ respond forecast, [status: OK] }
@@ -129,7 +129,7 @@ class ForecastController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'forecast.message.delete', args: [forecast.score, getAuthenticatedUser() ,forecast.game])
+                flash.message = message(code: 'forecast.message.delete', args: [forecast.score, forecast.game])
                 redirect controller: "game", action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

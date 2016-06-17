@@ -32,7 +32,7 @@
                         <tr>
                             <g:sortableColumn property="startDate" title="${message(code: 'game.startDate.label', default: 'Дата')}" />
                             <th><g:message code="game.label" default="Матч" /></th>
-                            <th><g:message code="game.forecasts.label" default="Прогнозы" /></th>
+                            <th><g:message code="game.forecasts.grid.label" default="Прогнозы" /></th>
                             <g:sortableColumn property="score" title="${message(code: 'game.score.label', default: 'Факт')}" />
                         </tr>
                     </thread>
@@ -40,7 +40,13 @@
                     <g:each in="${gameList}" var="game" status="i">
                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                             <td><g:formatDate formatName="default.date.format" date="${game?.startDate}"/></td>
-                            <td><g:link method="GET" resource="${game}">${game}</g:link></td>
+                            %{--<td><g:link method="GET" resource="${game}">${game}</g:link></td>--}%
+                            <td>
+                                <a href="javascript:void(0)" onclick="showHide('${'forecast_'.plus(game.id)}')">${game}</a>
+                                <div id="${'forecast_'.plus(game.id)}" style="display: none;">
+                                    <g:render template="forecasts" bean="${game?.forecasts}"></g:render>
+                                </div>
+                            </td>
                             <td>
                                 <g:set var="forecast" value="${game.forecasts.find {it.user == user}}"/>
                                 <g:if test="${game?.startDate <= new Date()}">
@@ -49,6 +55,7 @@
                                     <g:link method="GET" resource="${forecast}">${forecast?.score}</g:link>
                                 </g:elseif>
                                 <g:else>
+                                    %{--<g:remoteLink controller="forecast" action="create" method="GET" params="['game.id': game.id, 'user.id':user.id]">remoteLink</g:remoteLink>--}%
                                     <g:link controller="forecast" action="create" params="['game.id': game.id, 'user.id':user.id]">Добавить</g:link>
                                 </g:else>
                             </td>
@@ -65,5 +72,17 @@
                 <g:paginate total="${gameCount ?: 0}" />
             </div>
         </div>
+    <script type="text/javascript">
+        function showHide(element_id) {
+            if (document.getElementById(element_id)) {
+                var obj = document.getElementById(element_id);
+                if (obj.style.display != "block") {
+                    obj.style.display = "block";
+                }
+                else obj.style.display = "none";
+            }
+//            else alert("Элемент с id: " + element_id + " не найден!");
+        }
+    </script>
     </body>
 </html>

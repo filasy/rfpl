@@ -38,6 +38,7 @@
                             </ul>
                         </li>
                     </sec:ifLoggedIn>
+                    %{--<g:pageProperty name="page.nav" />--}%
                 </ul>
             </div>
         </div>

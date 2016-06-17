@@ -128,7 +128,21 @@ class BootStrap {
                 .addToUsers(User.findByUsername('pirogov'))
                 .addToUsers(User.findByUsername('evgeny'))
                 .save()
-        assert Rank.count() == 2
+        rank = new Rank(name: "РФПЛ 2016-2017")
+                .addToUsers(User.findByUsername('admin'))
+                .addToUsers(User.findByUsername('pirogov'))
+                .addToUsers(User.findByUsername('semen'))
+                .addToUsers(User.findByUsername('daniil'))
+                .addToUsers(User.findByUsername('sergey'))
+                .addToUsers(User.findByUsername('pavel'))
+                .addToUsers(User.findByUsername('ivan'))
+                .addToUsers(User.findByUsername('oleg'))
+                .addToUsers(User.findByUsername('ekaterina'))
+                .addToUsers(User.findByUsername('mahail'))
+                .addToUsers(User.findByUsername('aleksandr'))
+                .addToUsers(User.findByUsername('evgeny'))
+                .save()
+        assert Rank.count() == 3
     }
 
     void createScore(){
@@ -191,6 +205,8 @@ class BootStrap {
                 firstTeam:  Team.findByName("Португалия"), secondTeam:  Team.findByName("Исландия")).save()
 		game = new Game(startDate: new Date(116,5,18,16,00), rank: Rank.findByName("Евро 2016"),
                 firstTeam:  Team.findByName("Бельгия"), secondTeam:  Team.findByName("Ирландия")).save()
+        game = new Game(startDate: new Date(116,5,25,16,00), rank: Rank.findByName("РФПЛ 2016-2017"),
+                firstTeam:  Team.findByName("Бельгия"), secondTeam:  Team.findByName("Анжи")).save()
 //        assert Game.count() == 30
     }
 
@@ -209,7 +225,10 @@ class BootStrap {
         forecast = new Forecast(user: User.findByUsername('pirogov'),
                 game: Game.findByFirstTeamAndSecondTeam(Team.findByName('Ростов'), Team.findByName("Анжи")),
                 score: Score.findByFirstTeamAndSecondTeam(2,1)).save()
+        forecast = new Forecast(user: User.findByUsername('pirogov'),
+                game: Game.findByFirstTeamAndSecondTeam(Team.findByName('Бельгия'), Team.findByName("Анжи")),
+                score: Score.findOrCreateByFirstTeamAndSecondTeam(9,9)).save()
 
-        assert Forecast.count() == 4
+        assert Forecast.count() == 5
     }
 }
