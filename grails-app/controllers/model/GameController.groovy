@@ -133,4 +133,5 @@ class GameController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
 }

@@ -14,16 +14,11 @@
             </ul>
         </div>
         <div id="list-game" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
             <g:form action="index" class="message">
-                <g:datePicker id="date" name="date"
-                              value="${date}"
-                              default="${new Date()}"
-                              precision="day"
-                              years="${2015..2017}"/>
+                <g:datePicker id="date" name="date" value="${date}" default="${new Date()}" precision="day" years="${2015..2017}"/>
                 <g:submitButton name="search" value="Найти"/>
             </g:form>
             <div class="scrollable">
@@ -44,7 +39,7 @@
                             <td>
                                 <a href="javascript:void(0)" onclick="showHide('${'forecast_'.plus(game.id)}')">${game}</a>
                                 <div id="${'forecast_'.plus(game.id)}" style="display: none;">
-                                    <g:render template="forecasts" bean="${game?.forecasts}"></g:render>
+                                    <g:render template="forecasts" bean="${game?.forecasts}"/>
                                 </div>
                             </td>
                             <td>
@@ -55,8 +50,15 @@
                                     <g:link method="GET" resource="${forecast}">${forecast?.score}</g:link>
                                 </g:elseif>
                                 <g:else>
-                                    %{--<g:remoteLink controller="forecast" action="create" method="GET" params="['game.id': game.id, 'user.id':user.id]">remoteLink</g:remoteLink>--}%
-                                    <g:link controller="forecast" action="create" params="['game.id': game.id, 'user.id':user.id]">Добавить</g:link>
+                                    <div id="create_forecast">
+                                        <g:formRemote name="create_forecast"
+                                                      url="[controller:'forecast', action:'createRemote', params: ['game.id': game.id, 'user.id':user.id]]"
+                                                      update="create_forecast">
+                                            <g:field type="text" name="first" size="1"/>
+                                            <g:field type="text" name="second" size="1"/>
+                                            <g:submitButton name="submit" value="OK"/>
+                                        </g:formRemote>
+                                    </div>
                                 </g:else>
                             </td>
                             <td>
@@ -81,7 +83,6 @@
                 }
                 else obj.style.display = "none";
             }
-//            else alert("Элемент с id: " + element_id + " не найден!");
         }
     </script>
     </body>

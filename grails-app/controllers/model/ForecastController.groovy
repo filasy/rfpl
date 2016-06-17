@@ -5,7 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @Secured(['ROLE_ADMIN','ROLE_USER'])
 class ForecastController {
 	def springSecurityService
@@ -67,6 +67,16 @@ class ForecastController {
             '*'{ respond forecast, [status: OK] }
         }
     }
+
+    def createRemote () {
+        if (!params.user || !params.game || !params.first || !params.second) {
+            render status: NOT_FOUND
+        }
+        def forecast = new Forecast(user: params.user, game: params.game,
+                score: Score.findOrCreateByFirstTeamAndSecondTeam(params.first, params.second)).save()
+        render status: OK
+    }
+
     def edit(Forecast forecast) {
         respond forecast
     }
@@ -153,4 +163,6 @@ class ForecastController {
     private boolean notCurrentUser(Forecast forecast) {
         return forecast.user.id != getAuthenticatedUser().id && !getAuthenticatedUser().isAdmin()
     }
+
+
 }
