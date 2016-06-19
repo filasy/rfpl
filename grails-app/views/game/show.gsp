@@ -40,14 +40,14 @@
                 <g:if test="${game?.score}">
                     <li class="fieldcontain">
                         <span id="score-label" class="property-label"><g:message code="game.score.label" default="Score" /></span>
-                        <span class="property-value" aria-labelledby="score-label"><g:link controller="score" action="show" id="${game?.score?.id}">${game?.score?.encodeAsHTML()}</g:link></span>
+                        <span class="property-value" aria-labelledby="score-label">${game?.score?.encodeAsHTML()}</span>
                     </li>
                 </g:if>
                 <g:if test="${game?.forecasts}">
                     <li class="fieldcontain">
                     <span id="forecasts-label" class="property-label"><g:message code="game.forecasts.label" default="Score" /></span>
-                        <g:each in="${game?.forecasts}" var="forecast" status="i" >
-                                <span class="property-value" aria-labelledby="forecast${i}-label">${forecast.encodeAsHTML()}</span>
+                        <g:each in="${game?.forecasts.sort{ -it.getBall()}}" var="forecast" status="i" >
+                                <span class="property-value" aria-labelledby="forecast${i}-label">${forecast.score} ${forecast.user} (${forecast.getBall()})</span>
                         </g:each>
                     </li>
                 </g:if>

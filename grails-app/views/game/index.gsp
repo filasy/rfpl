@@ -37,10 +37,11 @@
                             <td><g:formatDate formatName="default.date.format" date="${game?.startDate}"/></td>
                             %{--<td><g:link method="GET" resource="${game}">${game}</g:link></td>--}%
                             <td>
-                                <a href="javascript:void(0)" onclick="showHide('${'forecast_'.plus(game.id)}')">${game}</a>
-                                <div id="${'forecast_'.plus(game.id)}" style="display: none;">
-                                    <g:render template="forecasts" bean="${game?.forecasts}"/>
+                                <a href="javascript:void(0)" onclick="showHide('${'game'.plus(game.id)}')">${game}</a>
+                                <div id="${'game'.plus(game.id)}" style="display: none;">
+                                    <g:render template="forecastsForGame" bean="${game?.forecasts}"/>
                                 </div>
+                                <sec:ifAnyGranted roles="ROLE_ADMIN"><g:link method="GET" resource="${game}"> |+|</g:link></sec:ifAnyGranted>
                             </td>
                             <td>
                                 <g:set var="forecast" value="${game.forecasts.find {it.user == user}}"/>
@@ -54,9 +55,9 @@
                                         <g:formRemote name="create_forecast"
                                                       url="[controller:'forecast', action:'createRemote', params: ['game.id': game.id, 'user.id':user.id]]"
                                                       update="create_forecast">
-                                            <g:field type="text" name="first" size="1"/>
-                                            <g:field type="text" name="second" size="1"/>
-                                            <g:submitButton name="submit" value="OK"/>
+                                            <g:textField type="text" name="first" size="1"/>
+                                            <g:textField type="text" name="second" size="1"/>
+                                            <g:submitButton name="OK"/>
                                         </g:formRemote>
                                     </div>
                                 </g:else>
@@ -75,11 +76,12 @@
             </div>
         </div>
     <script type="text/javascript">
-        function showHide(element_id) {
-            if (document.getElementById(element_id)) {
-                var obj = document.getElementById(element_id);
+        function showHide(el_id) {
+            if (document.getElementById(el_id)) {
+                var obj = document.getElementById(el_id);
                 if (obj.style.display != "block") {
                     obj.style.display = "block";
+
                 }
                 else obj.style.display = "none";
             }

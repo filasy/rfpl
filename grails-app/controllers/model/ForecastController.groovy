@@ -69,12 +69,9 @@ class ForecastController {
     }
 
     def createRemote () {
-        if (!params.user || !params.game || !params.first || !params.second) {
-            render status: NOT_FOUND
-        }
         def forecast = new Forecast(user: params.user, game: params.game,
-                score: Score.findOrCreateByFirstTeamAndSecondTeam(params.first, params.second)).save()
-        render status: OK
+                score: Score.findOrSaveByFirstTeamAndSecondTeam(params.first, params.second)).save()
+        model: [forecast: forecast]
     }
 
     def edit(Forecast forecast) {
