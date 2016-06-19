@@ -37,9 +37,16 @@
                             <td><g:formatDate formatName="default.date.format" date="${game?.startDate}"/></td>
                             %{--<td><g:link method="GET" resource="${game}">${game}</g:link></td>--}%
                             <td>
-                                <a href="javascript:void(0)" onclick="showHide('${'game'.plus(game.id)}')">${game}</a>
-                                <div id="${'game'.plus(game.id)}" style="display: none;">
-                                    <g:render template="forecastsForGame" bean="${game?.forecasts}"/>
+                                <g:set var="id_game" value="${'game'.plus(game.id)}"/>
+                                <a href="javascript:void(0)" onclick="showHide('${id_game}')">${game}</a>
+                                <div id="${id_game}" style="display: none;">
+                                %{--<div id="${id_game}">--}%
+                                    %{--<g:remoteLink controller="forecast"--}%
+                                                  %{--action="getForecastsByGame()"--}%
+                                                  %{--update="${id_game}" params="">--}%
+                                                %{--${game}--}%
+                                    %{--</g:remoteLink>--}%
+                                    <g:render template="forecastsForGame" bean="${game.forecasts}"/>
                                 </div>
                                 <sec:ifAnyGranted roles="ROLE_ADMIN"><g:link method="GET" resource="${game}"> |+|</g:link></sec:ifAnyGranted>
                             </td>
@@ -51,10 +58,11 @@
                                     <g:link method="GET" resource="${forecast}">${forecast?.score}</g:link>
                                 </g:elseif>
                                 <g:else>
-                                    <div id="create_forecast">
+                                    <g:set var="id_forecast" value="${'create_forecast'.plus(game.id)}"/>
+                                    <div id="${id_forecast}">
                                         <g:formRemote name="create_forecast"
                                                       url="[controller:'forecast', action:'createRemote', params: ['game.id': game.id, 'user.id':user.id]]"
-                                                      update="create_forecast">
+                                                      update="${id_forecast}">
                                             <g:textField type="text" name="first" size="1"/>
                                             <g:textField type="text" name="second" size="1"/>
                                             <g:submitButton name="OK"/>
