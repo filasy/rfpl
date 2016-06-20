@@ -1,5 +1,5 @@
-<g:if test="${it}">
-    <g:each in="${it.sort{ -it.getBall()}}" var="forecast" status="i" >
+<g:if test="${forecasts}">
+    <g:each in="${forecasts}" var="forecast" status="i" >
         <li><span class="property-value" aria-labelledby="forecast${i}-label">
             ${forecast.score} ${forecast.user} (${forecast.getBall()})
         </span></li>

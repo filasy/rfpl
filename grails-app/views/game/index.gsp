@@ -38,16 +38,13 @@
                             %{--<td><g:link method="GET" resource="${game}">${game}</g:link></td>--}%
                             <td>
                                 <g:set var="id_game" value="${'game'.plus(game.id)}"/>
-                                <a href="javascript:void(0)" onclick="showHide('${id_game}')">${game}</a>
-                                <div id="${id_game}" style="display: none;">
-                                %{--<div id="${id_game}">--}%
-                                    %{--<g:remoteLink controller="forecast"--}%
-                                                  %{--action="getForecastsByGame()"--}%
-                                                  %{--update="${id_game}" params="">--}%
-                                                %{--${game}--}%
-                                    %{--</g:remoteLink>--}%
-                                    <g:render template="forecastsForGame" bean="${game.forecasts}"/>
-                                </div>
+                                <g:remoteLink controller="forecast"
+                                              action="showForecastsByGame"
+                                              update="${id_game}" params="['game.id':game.id]"
+                                              onSuccess="showHide('${id_game}')">
+                                            ${game}
+                                </g:remoteLink>
+                                <div id="${id_game}" style="display: none;"></div>
                                 <sec:ifAnyGranted roles="ROLE_ADMIN"><g:link method="GET" resource="${game}"> |+|</g:link></sec:ifAnyGranted>
                             </td>
                             <td>
