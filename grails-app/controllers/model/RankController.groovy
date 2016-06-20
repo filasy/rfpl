@@ -70,11 +70,14 @@ class RankController {
             return
         }
 
-        rank.users.clear();
-        params.users.each {
-            println "Params user: " + User.get(it)
-            rank.addToUsers(User.get(it))
-        }
+//        println "params: " + params
+//        println "params.users: " + params.users
+//        println "rank.users: " + rank.users
+//        params.users.each {
+//            println "User.get("+ it +"): " + User.get(it)
+////            rank.addToUsers(User.get(it))
+//        }
+
         rank.save flush:true
 
         request.withFormat {

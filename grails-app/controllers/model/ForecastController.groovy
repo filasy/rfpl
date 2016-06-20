@@ -153,6 +153,15 @@ class ForecastController {
         }
     }
 
+    def showForecastsByGame(){
+
+        if (!params.game.id) {
+            flash.message = "Не задан матч"
+            return
+        }
+        [forecasts: Forecast.findAllByGame(Game.get(params.game.id)).sort{ -it.getBall()}]
+    }
+
     private boolean timeIsOver(Forecast forecast) {
         return  forecast.game.startDate <= new Date() && !getAuthenticatedUser().isAdmin()
     }

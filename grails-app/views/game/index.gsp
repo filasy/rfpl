@@ -68,8 +68,7 @@
                                 </g:else>
                             </td>
                             <td>
-                                <sec:ifAnyGranted roles="ROLE_ADMIN"><g:link method="GET" resource="${game?.score}">${fieldValue(bean: game, field: "score")}</g:link> </sec:ifAnyGranted>
-                                <sec:ifAnyGranted roles="ROLE_USER"> ${fieldValue(bean: game, field: "score")}</sec:ifAnyGranted>
+                                ${fieldValue(bean: game, field: "score")}
                             </td>
                         </tr>
                     </g:each>
