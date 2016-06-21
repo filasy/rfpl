@@ -1,6 +1,5 @@
 package model
 
-import org.grails.databinding.BindingFormat
 import secure.User
 
 class Game {

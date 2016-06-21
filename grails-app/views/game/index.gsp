@@ -52,7 +52,14 @@
                                 <g:if test="${game?.startDate <= new Date()}">
                                     ${forecast?.score}
                                 </g:if><g:elseif test="${forecast}">
-                                    <g:link method="GET" resource="${forecast}">${forecast?.score}</g:link>
+                                    <g:set var="edit_forecast" value="${'edit_forecast'.plus(forecast.id)}"/>
+                                    <div id="${edit_forecast}">
+                                        <g:remoteLink controller="forecast"
+                                                      action="edit"
+                                                      update="${edit_forecast}" params="[id :forecast.id]">
+                                            ${forecast?.score}
+                                        </g:remoteLink>
+                                    </div>
                                 </g:elseif>
                                 <g:else>
                                     <g:set var="id_forecast" value="${'create_forecast'.plus(game.id)}"/>
