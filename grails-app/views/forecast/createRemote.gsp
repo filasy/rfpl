@@ -9,5 +9,4 @@
             ${forecast?.score}
         </g:remoteLink>
     </div>
-    %{--<g:link method="GET" resource="${forecast}">${forecast?.score}</g:link>--}%
 </g:else>
