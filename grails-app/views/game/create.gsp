@@ -53,16 +53,8 @@
                             <g:message code="game.startDate.label" default="Start Date" />
                             <span class="required-indicator">*</span>
                         </label>
-                        <g:datePicker name="startDate" precision="minute"  value="${game?.startDate}"  />
+                        <g:datePicker name="startDate" precision="minute"  value="${game?.startDate}" years="${new Date().getYear()+1900}" />
                     </div>
-                    <div class="fieldcontain ${hasErrors(bean: game, field: 'score', 'error')} ">
-                        <label for="score">
-                            <g:message code="game.score.label" default="Score" />
-                        </label>
-                        <g:select id="score" name="score.id" from="${model.Score.list()}" optionKey="id" value="${game?.score?.id}" class="many-to-one" noSelection="['null': '']"/>
-                    </div>
-
-                    %{--<f:all bean="game"/>--}%
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
