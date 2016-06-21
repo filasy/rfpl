@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = false)
-@Secured(['ROLE_ADMIN','ROLE_USER'])
+@Secured('ROLE_ADMIN')
 class ForecastController {
 	def springSecurityService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -25,10 +25,12 @@ class ForecastController {
         respond forecast
     }
 
+    @Secured('ROLE_ADMIN')
     def create() {
         respond new Forecast(params)
     }
 
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     @Transactional
     def save(Forecast forecast) {
         if (forecast == null) {
@@ -68,17 +70,13 @@ class ForecastController {
         }
     }
 
-    def createRemote () {
-        def forecast = new Forecast(user: params.user, game: params.game,
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(params.first, params.second)).save()
-        model: [forecast: forecast]
-    }
-
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def edit(Forecast forecast) {
         respond forecast
     }
 
     @Transactional
+    @Secured('ROLE_ADMIN')
     def update(Forecast forecast) {
         if (forecast == null) {
             transactionStatus.setRollbackOnly()
@@ -118,6 +116,7 @@ class ForecastController {
     }
 
     @Transactional
+    @Secured('ROLE_ADMIN')
     def delete(Forecast forecast) {
 
         if (forecast == null) {
@@ -153,8 +152,32 @@ class ForecastController {
         }
     }
 
-    def showForecastsByGame(){
 
+    @Transactional
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def createByUser () {
+        def forecast = new Forecast(user: params.user, game: params.game,
+                score: Score.findOrSaveByFirstTeamAndSecondTeam(params.firstTeam, params.secondTeam)).save()
+        render(template: "showInGameIndex", model: [forecast: forecast])
+    }
+
+    @Transactional
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def updateByUser(Forecast forecast) {
+        forecast.save flush:true
+        render(template: "showInGameIndex", model: [forecast: forecast])
+    }
+
+    @Transactional
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def deleteByUser(Forecast forecast) {
+        forecast.delete flush:true
+        render(template: "showInGameIndex", model: [forecast: Forecast.findById(params.id), game: forecast?.game, user: getAuthenticatedUser()])
+    }
+
+
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def showAllByGame(){
         if (!params.game.id) {
             flash.message = "Не задан матч"
             return

@@ -13,6 +13,9 @@ class Forecast implements Comparable{
     static constraints = {
         user nullable: false, unique: ('game')
         game nullable: false, unique: ('user')
+        score()
+        dateCreated()
+        lastUpdated()
     }
 
     @Override

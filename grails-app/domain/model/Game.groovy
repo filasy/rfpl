@@ -12,11 +12,13 @@ class Game {
     static hasMany = [forecasts: Forecast]
 
     static constraints = {
-        startDate nullable: false
+        rank nullable: false, unique: (['firstTeam','secondTeam'])
         firstTeam nullable: false, unique: (['secondTeam','rank'])
         secondTeam nullable: false, unique: (['firstTeam','rank'])
+        startDate nullable: false
         score nullable: true
-        rank nullable: false, unique: (['firstTeam','secondTeam'])
+        forecasts()
+
     }
 
     static embedded = ['score']

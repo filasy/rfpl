@@ -35,11 +35,10 @@
                     <g:each in="${gameList}" var="game" status="i">
                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                             <td><g:formatDate formatName="default.date.format" date="${game?.startDate}"/></td>
-                            %{--<td><g:link method="GET" resource="${game}">${game}</g:link></td>--}%
                             <td>
                                 <g:set var="id_game" value="${'game'.plus(game.id)}"/>
                                 <g:remoteLink controller="forecast"
-                                              action="showForecastsByGame"
+                                              action="showAllByGame"
                                               update="${id_game}" params="['game.id':game.id]"
                                               onSuccess="showHide('${id_game}')">
                                             ${game}
@@ -52,23 +51,23 @@
                                 <g:if test="${game?.startDate <= new Date()}">
                                     ${forecast?.score}
                                 </g:if><g:elseif test="${forecast}">
-                                    <g:set var="edit_forecast" value="${'edit_forecast'.plus(forecast.id)}"/>
-                                    <div id="${edit_forecast}">
+                                    <g:set var="id_update" value="${'for'.plus(game.id)}"/>
+                                    <div id="${id_update}">
                                         <g:remoteLink controller="forecast"
                                                       action="edit"
-                                                      update="${edit_forecast}" params="[id :forecast.id]">
+                                                      update="${id_update}" params="[id :forecast.id]">
                                             ${forecast?.score}
                                         </g:remoteLink>
                                     </div>
                                 </g:elseif>
                                 <g:else>
-                                    <g:set var="id_forecast" value="${'create_forecast'.plus(game.id)}"/>
-                                    <div id="${id_forecast}">
+                                    <g:set var="id_update" value="${'for'.plus(game.id)}"/>
+                                    <div id="${id_update}">
                                         <g:formRemote name="create_forecast"
-                                                      url="[controller:'forecast', action:'createRemote', params: ['game.id': game.id, 'user.id':user.id]]"
-                                                      update="${id_forecast}">
-                                            <g:textField type="text" name="first" size="1"/>
-                                            <g:textField type="text" name="second" size="1"/>
+                                                      url="[controller:'forecast', action:'createByUser', params: ['game.id': game.id, 'user.id':user.id]]"
+                                                      update="${id_update}">
+                                            <g:textField type="text" name="firstTeam" size="1"/>
+                                            <g:textField type="text" name="secondTeam" size="1"/>
                                             <g:submitButton name="OK"/>
                                         </g:formRemote>
                                     </div>

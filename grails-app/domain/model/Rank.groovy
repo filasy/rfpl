@@ -9,12 +9,15 @@ class Rank implements Comparable{
     boolean enabled = true
     SortedSet users
 
-    static belongsTo  = User
+    static belongsTo  = [User]
     static hasMany = [users: User]
 
     static constraints = {
         name blank: false, unique: true
         enabled nullable: false
+        users()
+        dateCreated()
+        lastUpdated()
     }
 
     static mapping = {
