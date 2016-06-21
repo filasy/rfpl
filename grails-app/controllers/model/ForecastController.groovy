@@ -110,7 +110,7 @@ class ForecastController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'forecast.message.update', args: [forecast.score ,forecast.game])
+//                flash.message = message(code: 'forecast.message.update', args: [forecast.score ,forecast.game])
                 redirect controller: "game", action:"index", method:"GET"
             }
             '*'{ respond forecast, [status: OK] }
