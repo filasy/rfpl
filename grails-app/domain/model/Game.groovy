@@ -20,10 +20,11 @@ class Game {
         rank nullable: false, unique: (['firstTeam','secondTeam'])
     }
 
+    static embedded = ['score']
     static mapping = {
         sort "startDate":"desc"
-//        sort "forecasts": "asc"
     }
+
 
     @Override
     String toString() {
