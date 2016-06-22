@@ -25,7 +25,7 @@
     </g:formRemote>
 
     <div class="scrollable" id="result">
-        <g:render template="showResultsAjax" model="[games: games, users: users, rank:rank]" />
+        <g:render template="showAjax" model="[games: games, users: users, rank:rank]" />
     </div>
 </div>
 </body>

@@ -41,7 +41,7 @@ class GameController {
     def showResultsAjax(){
         def rank = Rank.get(params.id)
         if (rank) {
-            render(template: "showResultAjax",
+            render(template: "showAjax",
                     model: [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
                             users: User.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
                             rank: rank])
