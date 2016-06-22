@@ -39,7 +39,17 @@
                         <td>${game?.score}</td>
                         <g:each in="${sorted_users}" status="j" var="user">
                             <g:set var="forecast" value="${forecasts?.find {it.user.id == user.id}}"/>
-                            <td><g:if test="${forecast}">${forecast?.score} (${forecast?.getBall()})</g:if></td>
+                            <td>
+                                <g:if test="${forecast}">
+                                <g:if test="${forecast?.lastUpdated > game?.startDate}">
+                                    <font color="#a9a9a9">
+                                        ${forecast?.score} (${forecast?.getBall()})
+                                    </font>
+                                </g:if><g:else>
+                                    ${forecast?.score} (${forecast?.getBall()})
+                                </g:else>
+                            </g:if>
+                            </td>
                         </g:each>
                     </tr>
                 </g:each>

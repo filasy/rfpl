@@ -108,7 +108,7 @@ class ForecastController {
 
         request.withFormat {
             form multipartForm {
-//                flash.message = message(code: 'forecast.message.update', args: [forecast.score ,forecast.game])
+                flash.message = message(code: 'forecast.message.update', args: [forecast.score ,forecast.game])
                 redirect controller: "game", action:"index", method:"GET"
             }
             '*'{ respond forecast, [status: OK] }
@@ -174,7 +174,6 @@ class ForecastController {
         forecast.delete flush:true
         render(template: "showInGameIndex", model: [forecast: Forecast.findById(params.id), game: forecast?.game, user: getAuthenticatedUser()])
     }
-
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def showAllByGame(){
