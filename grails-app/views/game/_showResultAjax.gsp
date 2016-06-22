@@ -25,7 +25,7 @@
                                 ${forecast?.score} (${forecast?.getBall()})
                             </font>
                         </g:if><g:else>
-                        ${forecast?.score} (${forecast?.getBall()})
+                                ${forecast?.score} (${forecast?.getBall()})
                     </g:else>
                     </g:if>
                 </td>
