@@ -1,6 +1,7 @@
 package model
 
 import grails.plugin.springsecurity.annotation.Secured
+import secure.User
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -29,10 +30,22 @@ class GameController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def showResults(Integer max){
         def rank = Rank.get(params.id)
-        if (rank == null) {
-            notFound()
+        if (rank) {
+            [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
+             users: User.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
+             rank: rank]
         }
-        return [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()), users: rank?.getUsers(), rank: rank]
+    }
+
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def showResultsAjax(){
+        def rank = Rank.get(params.id)
+        if (rank) {
+            render(template: "showResultAjax",
+                    model: [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
+                            users: User.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
+                            rank: rank])
+        }
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
