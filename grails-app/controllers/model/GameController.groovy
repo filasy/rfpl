@@ -55,7 +55,7 @@ class GameController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def create() {
-        respond new Game(params), model: [user: getAuthenticatedUser()]
+        respond new Game(params)
     }
 
     @Transactional
