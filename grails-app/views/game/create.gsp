@@ -31,8 +31,8 @@
                             <g:message code="game.rank.label" default="Rank" />
                         </label>
                         <g:select id="rank" name="rank.id" from="${model.Rank.findAllByEnabled(true)}" optionKey="id" value="${game?.rank?.id}" class="many-to-one"/>
+                        %{--<g:select id="rank" name="rank.id" from="${}" optionKey="id" value="${game?.rank?.id}" class="many-to-one"/>--}%
                     </div>
-
                     <div class="fieldcontain ${hasErrors(bean: game, field: 'firstTeam', 'error')} required">
                         <label for="firstTeam">
                             <g:message code="game.firstTeam.label" default="First Team" />
