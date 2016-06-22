@@ -15,16 +15,16 @@
             </g:elseif>
             <g:else>
                 <ul class="errors">
-                    <li>An error has occurred</li>
-                    <li>Exception: ${exception}</li>
-                    <li>Message: ${message}</li>
-                    <li>Path: ${path}</li>
+                    <li>Произошла внутренняя ошибка сервера</li>
+                    <li>Исключение: ${exception}</li>
+                    <li>Сообщение: ${message}</li>
+                    <li>Путь: ${path}</li>
                 </ul>
             </g:else>
         </g:if>
         <g:else>
             <ul class="errors">
-                <li>An error has occurred</li>
+                <li>Произошла внутренняя ошибка сервера. Просьба повторить попытку и в случае повторения ошибки сообщить подробности на jFilasy@gmail.com</li>
             </ul>
         </g:else>
     </body>
