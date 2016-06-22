@@ -1,6 +1,7 @@
 package model
 
 import grails.plugin.springsecurity.annotation.Secured
+import secure.User
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -27,7 +28,9 @@ class ForecastController {
 
     @Secured('ROLE_ADMIN')
     def create() {
-        respond new Forecast(params)
+        Forecast forecast = new Forecast(params)
+        forecast.lastUser = getAuthenticatedUser()
+        respond forecast
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -72,6 +75,7 @@ class ForecastController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def edit(Forecast forecast) {
+        forecast.lastUser = getAuthenticatedUser()
         respond forecast
     }
 
@@ -156,7 +160,7 @@ class ForecastController {
     @Transactional
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def createByUser () {
-        def forecast = new Forecast(user: params.user, game: params.game,
+        def forecast = new Forecast(user: params.user, game: params.game, lastUser: getAuthenticatedUser(),
                 score: Score.findOrSaveByFirstTeamAndSecondTeam(params.firstTeam, params.secondTeam)).save()
         render(template: "showInGameIndex", model: [forecast: forecast])
     }
@@ -164,6 +168,7 @@ class ForecastController {
     @Transactional
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def updateByUser(Forecast forecast) {
+        forecast.lastUser = getAuthenticatedUser()
         forecast.save flush:true
         render(template: "showInGameIndex", model: [forecast: forecast])
     }

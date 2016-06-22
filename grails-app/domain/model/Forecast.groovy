@@ -4,6 +4,7 @@ import secure.User
 
 class Forecast implements Comparable{
     User user
+    User lastUser
     Score score
     Date dateCreated
     Date lastUpdated
@@ -16,6 +17,7 @@ class Forecast implements Comparable{
         score()
         dateCreated()
         lastUpdated()
+        lastUser(nullable: true)
     }
 
     @Override

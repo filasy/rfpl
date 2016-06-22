@@ -1,7 +1,7 @@
 <g:set var="id_update" value="${'for'.plus(forecast?.game.id)}"/>
 <g:form >
     <g:hiddenField name="version" value="${this.forecast?.version}" />
-    <f:all bean="forecast" except="user,game"/>
+    <f:all bean="forecast" except="user,game,lastUser"/>
     <g:submitToRemote value="OK"
         url = "[controller: 'forecast', action: 'updateByUser', params: [id: forecast.id]]"
         update = "${id_update}"/>
