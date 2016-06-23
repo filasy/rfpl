@@ -18,9 +18,9 @@ class User implements Serializable, Comparable {
 	String password
 	String name
 	boolean enabled = true
-	boolean accountExpired
-	boolean accountLocked
-	boolean passwordExpired
+	boolean aexpired
+	boolean alocked
+	boolean pexpired
 	
 	SortedSet ranks
 	static hasMany = [ranks: Rank]
