@@ -186,7 +186,8 @@ class ForecastController {
             flash.message = "Не задан матч"
             return
         }
-        [forecasts: Forecast.findAllByGame(Game.get(params.game.id)).sort{ -it.getBall()}]
+        def game = Game.get(params.game.id)
+        [forecasts: game?.startDate <= new Date() ? Forecast.findAllByGame(game).sort{ -it.getBall()} : null]
     }
 
     private boolean timeIsOver(Forecast forecast) {

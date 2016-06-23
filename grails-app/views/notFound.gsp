@@ -7,7 +7,7 @@
     </head>
     <body>
         <ul class="errors">
-            <li>Ошибка: Страница не нейдена (404)</li>
+            <li>Ошибка: Страница не найдена (404)</li>
             <li>Путь: ${request.forwardURI}</li>
         </ul>
     </body>

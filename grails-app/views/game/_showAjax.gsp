@@ -34,3 +34,6 @@
     </g:each>
     </tbody>
 </table>
+%{--<div class="pagination">--}%
+    %{--<g:paginate total="${count ?: 0}"/>--}%
+%{--</div>--}%

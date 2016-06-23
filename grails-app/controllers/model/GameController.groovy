@@ -29,20 +29,25 @@ class GameController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def showResults(Integer max){
+        params.max = Math.min(max ?: 8, 100)
         def rank = Rank.get(params.id)
         if (rank) {
             [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
+//             count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
              users: User.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
-             rank: rank]
+             rank: rank
+             ]
         }
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
-    def showResultsAjax(){
+    def showResultsAjax(Integer max){
+        params.max = Math.min(max ?: 8, 100)
         def rank = Rank.get(params.id)
         if (rank) {
             render(template: "showAjax",
                     model: [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
+//                            count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
                             users: User.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
                             rank: rank])
         }
@@ -50,7 +55,11 @@ class GameController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def show(Game game) {
-        respond game
+        if (game?.startDate <= new Date() && !getAuthenticatedUser().isAdmin()){
+            respond game
+        } else {
+            notFound()
+        }
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -84,8 +93,9 @@ class GameController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'game.label', default: 'Game'), game.id])
-                redirect game
+                flash.message = message(code: 'default.created.message', args: [message(code: 'game.label', default: 'Game'), game.id, game])
+//                redirect game
+                redirect controller: "game", action:"index", method:"GET"
             }
             '*' { respond game, [status: CREATED] }
         }
