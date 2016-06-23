@@ -31,7 +31,7 @@
                             <g:message code="game.rank.label" default="Rank" />
                             <span class="required-indicator">*</span>
                         </label>                        
-                        <g:select id="rank" name="rank.id" from="${secure.User.get(sec.loggedInUserInfo(field: 'id')).ranks.findAll {it.enabled}}" optionKey="id" value="${game?.rank?.id}" class="many-to-one"/>
+                        <g:select id="rank" name="rank.id" from="${secure.Gamer.get(sec.loggedInUserInfo(field: 'id')).ranks.findAll {it.enabled}}" optionKey="id" value="${game?.rank?.id}" class="many-to-one"/>
                     </div>
                     <div class="fieldcontain ${hasErrors(bean: game, field: 'firstTeam', 'error')} required">
                         <label for="firstTeam">

@@ -1,10 +1,10 @@
 package model
 
-import secure.User
+import secure.Gamer
 
 class Forecast implements Comparable{
-    User user
-    User lastUser
+    Gamer user
+    Gamer lastUser
     Score score
     Date dateCreated
     Date lastUpdated

@@ -8,7 +8,7 @@ import model.Rank
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='name', includeNames=true, includePackage=true)
-class User implements Serializable, Comparable {
+class Gamer implements Serializable, Comparable {
 
 	private static final long serialVersionUID = 1
 
@@ -26,7 +26,7 @@ class User implements Serializable, Comparable {
 	static hasMany = [ranks: Rank]
 
 
-	User(String username, String password, String name) {
+	Gamer(String username, String password, String name) {
 		this()
 		this.username = username
 		this.password = password

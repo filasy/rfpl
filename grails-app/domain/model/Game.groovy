@@ -1,6 +1,6 @@
 package model
 
-import secure.User
+import secure.Gamer
 
 class Game {
     Date startDate
@@ -32,7 +32,7 @@ class Game {
         firstTeam.toString() + " - " + secondTeam.toString()
     }
 
-    int getBallForUser(User user){
+    int getBallForUser(Gamer user){
         return forecasts.find { it.user == user }.getBall()?:0
     }
 }

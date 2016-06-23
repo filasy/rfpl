@@ -3,7 +3,7 @@ package model
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
-import secure.User
+import secure.Gamer
 
 @Transactional(readOnly = true)
 @Secured('ROLE_ADMIN')
@@ -39,7 +39,7 @@ class RankController {
         }
 		
 		params.users.each {						
-			rank.addToUsers(User.get(it))
+			rank.addToUsers(Gamer.get(it))
 		}
 		rank.save flush:true
 

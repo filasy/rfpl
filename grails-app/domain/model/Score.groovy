@@ -10,7 +10,6 @@ class Score implements Comparable <Score> {
     }
 
     static mapping = {
-        password column: '`password`'
         sort firstTeam: "asc", secondTeam: "asc"
     }
 

@@ -4,8 +4,8 @@ import model.Rank
 
 import model.Team
 import model.Score
+import secure.Gamer
 import secure.Role
-import secure.User
 import secure.UserRole
 
 class BootStrap {
@@ -40,36 +40,36 @@ class BootStrap {
         def adminRole = new Role('ROLE_ADMIN').save(flush:true)
         def userRole = new Role('ROLE_USER').save(flush:true)
 
-        def testUser = new User('admin', 'admin','Филатова').save(flush:true)
+        def testUser = new Gamer('admin', 'admin','Филатова').save(flush:true)
         UserRole.create(testUser, adminRole, true)
 
-        testUser = new User('pirogov', '123', 'Евгений П').save(flush:true)
+        testUser = new Gamer('pirogov', '123', 'Евгений П').save(flush:true)
         UserRole.create(testUser, userRole, true)
 
-        testUser = new User('aleksandr', '123', 'Александр').save(flush:true)
+        testUser = new Gamer('aleksandr', '123', 'Александр').save(flush:true)
         UserRole.create(testUser, userRole, true)
 
-        testUser = new User('evgeny', '123','Евгений К').save(flush:true)
+        testUser = new Gamer('evgeny', '123','Евгений К').save(flush:true)
         UserRole.create(testUser, userRole, true)
-        testUser = new User('mahail', '123', 'Михаил').save(flush:true)
+        testUser = new Gamer('mahail', '123', 'Михаил').save(flush:true)
         UserRole.create(testUser, userRole, true)
-        testUser = new User('ekaterina', '123', 'Екатерина').save(flush:true)
+        testUser = new Gamer('ekaterina', '123', 'Екатерина').save(flush:true)
         UserRole.create(testUser, userRole, true)
-        testUser = new User('oleg', '123', 'Олег').save(flush:true)
+        testUser = new Gamer('oleg', '123', 'Олег').save(flush:true)
         UserRole.create(testUser, userRole, true)
-        testUser = new User('ivan', '123', 'Иван').save(flush:true)
+        testUser = new Gamer('ivan', '123', 'Иван').save(flush:true)
         UserRole.create(testUser, userRole, true)
-        testUser = new User('pavel', '123', 'Павел').save(flush:true)
+        testUser = new Gamer('pavel', '123', 'Павел').save(flush:true)
         UserRole.create(testUser, userRole, true)
-        testUser = new User('sergey', '123', 'Сергей').save(flush:true)
+        testUser = new Gamer('sergey', '123', 'Сергей').save(flush:true)
         UserRole.create(testUser, userRole, true)
-        testUser = new User('daniil', '123', 'Даниил').save(flush:true)
+        testUser = new Gamer('daniil', '123', 'Даниил').save(flush:true)
         UserRole.create(testUser, userRole, true)
-        testUser = new User('semen', '123', 'Семен').save(flush:true)
+        testUser = new Gamer('semen', '123', 'Семен').save(flush:true)
         UserRole.create(testUser, userRole, true)
 
 
-        assert User.count() == 12
+        assert Gamer.count() == 12
         assert Role.count() == 2
         assert UserRole.count() == 12
     }
@@ -119,28 +119,28 @@ class BootStrap {
 
     void createRankAndRound(){
         def rank = new Rank(name: "РФПЛ 2015-2016")
-                .addToUsers(User.findByUsername('pirogov'))
-                .addToUsers(User.findByUsername('admin'))
-                .addToUsers(User.findByUsername('aleksandr'))
+                .addToUsers(Gamer.findByUsername('pirogov'))
+                .addToUsers(Gamer.findByUsername('admin'))
+                .addToUsers(Gamer.findByUsername('aleksandr'))
                 .save(flush:true)
         rank = new Rank(name: "Евро 2016")
-                .addToUsers(User.findByUsername('admin'))
-                .addToUsers(User.findByUsername('pirogov'))
-                .addToUsers(User.findByUsername('evgeny'))
+                .addToUsers(Gamer.findByUsername('admin'))
+                .addToUsers(Gamer.findByUsername('pirogov'))
+                .addToUsers(Gamer.findByUsername('evgeny'))
                 .save(flush:true)
         rank = new Rank(name: "РФПЛ 2016-2017")
-                .addToUsers(User.findByUsername('admin'))
-                .addToUsers(User.findByUsername('pirogov'))
-                .addToUsers(User.findByUsername('semen'))
-                .addToUsers(User.findByUsername('daniil'))
-                .addToUsers(User.findByUsername('sergey'))
-                .addToUsers(User.findByUsername('pavel'))
-                .addToUsers(User.findByUsername('ivan'))
-                .addToUsers(User.findByUsername('oleg'))
-                .addToUsers(User.findByUsername('ekaterina'))
-                .addToUsers(User.findByUsername('mahail'))
-                .addToUsers(User.findByUsername('aleksandr'))
-                .addToUsers(User.findByUsername('evgeny'))
+                .addToUsers(Gamer.findByUsername('admin'))
+                .addToUsers(Gamer.findByUsername('pirogov'))
+                .addToUsers(Gamer.findByUsername('semen'))
+                .addToUsers(Gamer.findByUsername('daniil'))
+                .addToUsers(Gamer.findByUsername('sergey'))
+                .addToUsers(Gamer.findByUsername('pavel'))
+                .addToUsers(Gamer.findByUsername('ivan'))
+                .addToUsers(Gamer.findByUsername('oleg'))
+                .addToUsers(Gamer.findByUsername('ekaterina'))
+                .addToUsers(Gamer.findByUsername('mahail'))
+                .addToUsers(Gamer.findByUsername('aleksandr'))
+                .addToUsers(Gamer.findByUsername('evgeny'))
                 .save(flush:true)
         assert Rank.count() == 3
     }
@@ -221,62 +221,55 @@ class BootStrap {
 
     def createForecast(){
         //Тур10
-        def forecast = new Forecast(user: User.findByUsername('pirogov'),
+        def forecast = new Forecast(user: Gamer.findByUsername('pirogov'),
                 game: Game.findByFirstTeamAndSecondTeam(Team.findByName('Анжи'), Team.findByName("Уфа")),
                 score: Score.findByFirstTeamAndSecondTeam(2,1)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('pirogov'),
+        forecast = new Forecast(user: Gamer.findByUsername('pirogov'),
                 game: Game.findByFirstTeamAndSecondTeam(Team.findByName('ЦСКА'), Team.findByName("Локомотив")),
                 score: Score.findByFirstTeamAndSecondTeam(1,1)).save(flush:true)
         //Тур9
-        forecast = new Forecast(user: User.findByUsername('pirogov'),
+        forecast = new Forecast(user: Gamer.findByUsername('pirogov'),
                 game: Game.findByFirstTeamAndSecondTeam(Team.findByName('Терек'), Team.findByName("Уфа")),
                 score: Score.findByFirstTeamAndSecondTeam(2,0)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('pirogov'),
+        forecast = new Forecast(user: Gamer.findByUsername('pirogov'),
                 game: Game.findByFirstTeamAndSecondTeam(Team.findByName('Ростов'), Team.findByName("Анжи")),
                 score: Score.findByFirstTeamAndSecondTeam(2,1)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('pirogov'),
+        forecast = new Forecast(user: Gamer.findByUsername('pirogov'),
                 game: Game.findByFirstTeamAndSecondTeam(Team.findByName('Бельгия'), Team.findByName("Анжи")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(9,9)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('pirogov'),
+        forecast = new Forecast(user: Gamer.findByUsername('pirogov'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,0)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('mahail'),
+        forecast = new Forecast(user: Gamer.findByUsername('mahail'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,10)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('evgeny'),
+        forecast = new Forecast(user: Gamer.findByUsername('evgeny'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,1)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('ekaterina'),
+        forecast = new Forecast(user: Gamer.findByUsername('ekaterina'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,3)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('oleg'),
+        forecast = new Forecast(user: Gamer.findByUsername('oleg'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,2)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('ivan'),
+        forecast = new Forecast(user: Gamer.findByUsername('ivan'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,4)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('pavel'),
+        forecast = new Forecast(user: Gamer.findByUsername('pavel'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(0,0)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('sergey'),
+        forecast = new Forecast(user: Gamer.findByUsername('sergey'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,5)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('daniil'),
+        forecast = new Forecast(user: Gamer.findByUsername('daniil'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(2,0)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('semen'),
+        forecast = new Forecast(user: Gamer.findByUsername('semen'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,0)).save(flush:true)
-        forecast = new Forecast(user: User.findByUsername('aleksandr'),
+        forecast = new Forecast(user: Gamer.findByUsername('aleksandr'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(3,0)).save(flush:true)
-
-        User.each {
-            println it
-//            forecast = new Forecast(user: it,
-//                game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
-//                score: Score.findOrCreateByFirstTeamAndSecondTeam(1,0)).save(flush:true)
-        }
 
 //        assert Forecast.count() == 17
     }

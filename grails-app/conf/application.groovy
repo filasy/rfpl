@@ -1,5 +1,5 @@
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'secure.User'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'secure.Gamer'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'secure.UserRole'
 grails.plugin.springsecurity.authority.className = 'secure.Role'
 grails.plugin.springsecurity.logout.postOnly = false

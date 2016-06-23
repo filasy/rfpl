@@ -10,10 +10,10 @@ class UserRole implements Serializable {
 
 	private static final long serialVersionUID = 1
 
-	User user
+	Gamer user
 	Role role
 
-	UserRole(User u, Role r) {
+	UserRole(Gamer u, Role r) {
 		this()
 		user = u
 		role = r
@@ -46,18 +46,18 @@ class UserRole implements Serializable {
 
 	private static DetachedCriteria criteriaFor(long userId, long roleId) {
 		UserRole.where {
-			user == User.load(userId) &&
+			user == Gamer.load(userId) &&
 			role == Role.load(roleId)
 		}
 	}
 
-	static UserRole create(User user, Role role, boolean flush = false) {
+	static UserRole create(Gamer user, Role role, boolean flush = false) {
 		def instance = new UserRole(user: user, role: role)
 		instance.save(flush: flush, insert: true)
 		instance
 	}
 
-	static boolean remove(User u, Role r, boolean flush = false) {
+	static boolean remove(Gamer u, Role r, boolean flush = false) {
 		if (u == null || r == null) return false
 
 		int rowCount = UserRole.where { user == u && role == r }.deleteAll()
@@ -67,7 +67,7 @@ class UserRole implements Serializable {
 		rowCount
 	}
 
-	static void removeAll(User u, boolean flush = false) {
+	static void removeAll(Gamer u, boolean flush = false) {
 		if (u == null) return
 
 		UserRole.where { user == u }.deleteAll()

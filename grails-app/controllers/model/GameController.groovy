@@ -1,7 +1,7 @@
 package model
 
 import grails.plugin.springsecurity.annotation.Secured
-import secure.User
+import secure.Gamer
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -34,7 +34,7 @@ class GameController {
         if (rank) {
             [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
 //             count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
-             users: User.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
+             users: Gamer.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
              rank: rank
              ]
         }
@@ -48,7 +48,7 @@ class GameController {
             render(template: "showAjax",
                     model: [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
 //                            count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
-                            users: User.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
+                            users: Gamer.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
                             rank: rank])
         }
     }

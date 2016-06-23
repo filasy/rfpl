@@ -1,6 +1,6 @@
 package model
 
-import secure.User
+import secure.Gamer
 
 class Rank implements Comparable{
     String name;
@@ -9,8 +9,8 @@ class Rank implements Comparable{
     boolean enabled = true
     SortedSet users
 
-    static belongsTo  = [User]
-    static hasMany = [users: User]
+    static belongsTo  = [Gamer]
+    static hasMany = [users: Gamer]
 
     static constraints = {
         name blank: false, unique: true

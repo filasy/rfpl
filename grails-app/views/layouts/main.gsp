@@ -32,7 +32,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Мои лиги <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <g:each var="rank" in="${secure.User.get(sec.loggedInUserInfo(field: 'id')).ranks}">
+                                <g:each var="rank" in="${secure.Gamer.get(sec.loggedInUserInfo(field: 'id')).ranks}">
                                     <li><a href="${createLink(controller:'game', action: 'showResults', id: rank.id)}">${rank}</a></li>
                                 </g:each>
                             </ul>

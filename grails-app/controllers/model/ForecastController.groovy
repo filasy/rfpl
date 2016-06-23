@@ -1,7 +1,6 @@
 package model
 
 import grails.plugin.springsecurity.annotation.Secured
-import secure.User
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
