@@ -23,7 +23,7 @@ class GameController {
         respond Game.findAllByStartDateBetweenAndRankInList( startDate, endDate,
                     getAuthenticatedUser().ranks, params),
                 model:[gameCount: Game.findAllByStartDateBetweenAndRankInList(startDate, endDate,
-                        getAuthenticatedUser().ranks).size(),
+                       getAuthenticatedUser().ranks).size(),
                        date: date, user: getAuthenticatedUser()]
     }
 
