@@ -41,32 +41,32 @@ class BootStrap {
         testUser = new Gamer('pirogov', '123', 'Евгений П').save(flush:true)
         UserRole.create(testUser, userRole, true)
 
-        testUser = new Gamer('aleksandr', '123', 'Александр').save(flush:true)
-        UserRole.create(testUser, userRole, true)
+//        testUser = new Gamer('aleksandr', '123', 'Александр').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
+//
+//        testUser = new Gamer('evgeny', '123','Евгений К').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
+//        testUser = new Gamer('mahail', '123', 'Михаил').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
+//        testUser = new Gamer('ekaterina', '123', 'Екатерина').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
+//        testUser = new Gamer('oleg', '123', 'Олег').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
+//        testUser = new Gamer('ivan', '123', 'Иван').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
+//        testUser = new Gamer('pavel', '123', 'Павел').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
+//        testUser = new Gamer('sergey', '123', 'Сергей').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
+//        testUser = new Gamer('daniil', '123', 'Даниил').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
+//        testUser = new Gamer('semen', '123', 'Семен').save(flush:true)
+//        UserRole.create(testUser, userRole, true)
 
-        testUser = new Gamer('evgeny', '123','Евгений К').save(flush:true)
-        UserRole.create(testUser, userRole, true)
-        testUser = new Gamer('mahail', '123', 'Михаил').save(flush:true)
-        UserRole.create(testUser, userRole, true)
-        testUser = new Gamer('ekaterina', '123', 'Екатерина').save(flush:true)
-        UserRole.create(testUser, userRole, true)
-        testUser = new Gamer('oleg', '123', 'Олег').save(flush:true)
-        UserRole.create(testUser, userRole, true)
-        testUser = new Gamer('ivan', '123', 'Иван').save(flush:true)
-        UserRole.create(testUser, userRole, true)
-        testUser = new Gamer('pavel', '123', 'Павел').save(flush:true)
-        UserRole.create(testUser, userRole, true)
-        testUser = new Gamer('sergey', '123', 'Сергей').save(flush:true)
-        UserRole.create(testUser, userRole, true)
-        testUser = new Gamer('daniil', '123', 'Даниил').save(flush:true)
-        UserRole.create(testUser, userRole, true)
-        testUser = new Gamer('semen', '123', 'Семен').save(flush:true)
-        UserRole.create(testUser, userRole, true)
 
-
-//        assert Gamer.count() == 12
-//        assert Role.count() == 2
-//        assert UserRole.count() == 12
+        assert Gamer.count() == 2
+        assert Role.count() == 2
+        assert UserRole.count() == 2
     }
 
     void createTeam(){
