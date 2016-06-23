@@ -69,9 +69,9 @@ class BootStrap {
         UserRole.create(testUser, userRole, true)
 
 
-        assert Gamer.count() == 12
-        assert Role.count() == 2
-        assert UserRole.count() == 12
+//        assert Gamer.count() == 12
+//        assert Role.count() == 2
+//        assert UserRole.count() == 12
     }
 
     void createTeam(){
@@ -113,7 +113,7 @@ class BootStrap {
         team = new Team(name: "Бельгия").save(flush:true)
         team = new Team(name: "Ирландия").save(flush:true)
 
-        assert Team.count() == 36
+//        assert Team.count() == 36
     }
 
 
@@ -142,7 +142,7 @@ class BootStrap {
                 .addToUsers(Gamer.findByUsername('aleksandr'))
                 .addToUsers(Gamer.findByUsername('evgeny'))
                 .save(flush:true)
-        assert Rank.count() == 3
+//        assert Rank.count() == 3
     }
 
     void createScore(){
@@ -161,7 +161,7 @@ class BootStrap {
         score = Score.findOrSaveByFirstTeamAndSecondTeam(3,3)
         score = Score.findOrSaveByFirstTeamAndSecondTeam(4,1)
 
-        assert Score.count() == 14
+//        assert Score.count() == 14
     }
 
     void createGame(){
@@ -216,7 +216,7 @@ class BootStrap {
         game = new Game(startDate: new Date().plus(3), rank: Rank.findByName("Евро 2016"), score: Score.findOrCreateByFirstTeamAndSecondTeam(1,2),
                 firstTeam:  Team.findOrCreateByName("Словакия"), secondTeam:  Team.findOrCreateByName("Англия")).save(flush:true)
 
-        assert Game.count() == 21
+//        assert Game.count() == 21
     }
 
     def createForecast(){
