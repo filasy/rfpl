@@ -32,10 +32,10 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 environments {
 	production {
 		dataSource {
-			dbCreate = "create-drop"
+			dbCreate = "update"
 			driverClassName = "org.postgresql.Driver"
 			dialect = org.hibernate.dialect.PostgreSQL9Dialect
-			uri = new URI(System.env.DATABASE_URL?:"postgres://localhost:5432/test")
+			uri = new URI(System.env.DATABASE_URL)
 			url = "jdbc:postgresql://" + uri.host + ":" + uri.port + uri.path + "?sslmode=require"
 			username = uri.userInfo.split(":")[0]
 			password = uri.userInfo.split(":")[1]
