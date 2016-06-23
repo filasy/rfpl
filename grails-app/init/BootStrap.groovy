@@ -19,9 +19,9 @@ class BootStrap {
                 createUserRole()
                 createTeam()
                 createRankAndRound()
-                createScore()
-                createGame()
-                createForecast()
+//                createScore()
+//                createGame()
+//                createForecast()
             }
 
             test {}

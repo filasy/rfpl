@@ -55,7 +55,7 @@ class GameController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def show(Game game) {
-        if (game?.startDate <= new Date() && !getAuthenticatedUser().isAdmin()){
+        if (game?.startDate <= new Date() || getAuthenticatedUser().isAdmin()){
             respond game
         } else {
             notFound()
