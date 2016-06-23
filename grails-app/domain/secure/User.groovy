@@ -64,7 +64,7 @@ class User implements Serializable, Comparable {
 	}
 
 	static mapping = {
-		password column: '`password`'
+//		password column: '`password`'
 		sort name: "asc"
 	}
 
