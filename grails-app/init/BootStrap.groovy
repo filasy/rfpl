@@ -14,11 +14,6 @@ class BootStrap {
         environments {
             production {
                 createUserRole()
-                createTeam()
-                createRankAndRound()
-                createScore()
-                createGame()
-                createForecast()
             }
 
             development {
