@@ -1,5 +1,3 @@
-grails.plugin.fields.disableLookupCache = true
-
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'secure.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'secure.UserRole'
