@@ -13,7 +13,16 @@ class BootStrap {
     def init = { servletContext ->
         environments {
             production {
-                changeUserInfo("Pirogov563", "Pirogov1", "0723")
+//                changeUserInfo("Pirogov563", "Pirogov1", "0723")
+                changeUserInfo("Sergey286", "Sergey", "286")
+                changeUserInfo("Pavel749", "Pavel", "749")
+                changeUserInfo("Alexander582", "Alexander", "582")
+                changeUserInfo("Ivan201", "Ivan", "201")
+                changeUserInfo("Alexey709", "Alexey", "709")
+                changeUserInfo("Michael675", "Michael", "675")
+                changeUserInfo("Andrey131", "Andrey", "131")
+                changeUserInfo("Evgeny522", "Evgeny1", "522")
+                changeUserInfo("Evgeny316", "Evgeny2", "316")
             }
 
             development {
@@ -44,7 +53,7 @@ class BootStrap {
 
         def testUser = new Gamer('admin', 'sukanasos','Admin').save(flush:true)
         UserRole.create(testUser, adminRole, true)
-        testUser = new Gamer('Pirogov563', '573', 'Евгений П').save(flush:true)
+        testUser = new Gamer('Pirogov1', '0723', 'Евгений П').save(flush:true)
         UserRole.create(testUser, userRole, true)
         testUser = new Gamer('Andrey131', '141', 'Андрей').save(flush:true)
         UserRole.create(testUser, userRole, true)
@@ -164,13 +173,13 @@ class BootStrap {
         forecast = new Forecast(user: Gamer.findByUsername('Alexander582'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,5)).save(flush:true)
-        forecast = new Forecast(user: Gamer.findByUsername('Daniil926'),
+        forecast = new Forecast(user: Gamer.findByUsername('Evgeny316'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(2,0)).save(flush:true)
         forecast = new Forecast(user: Gamer.findByUsername('Sergey286'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,0)).save(flush:true)
-        forecast = new Forecast(user: Gamer.findByUsername('Pirogov563'),
+        forecast = new Forecast(user: Gamer.findByUsername('Pirogov1'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(3,0)).save(flush:true)
     }
