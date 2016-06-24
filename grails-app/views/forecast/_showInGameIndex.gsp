@@ -1,3 +1,6 @@
+<font color="red">
+    ${error}
+</font>
 <g:if test="${!forecast}">
     <g:if test="${game?.startDate > new Date()}">
         <g:set var="update" value="${'for'.plus(game?.id)}"/>

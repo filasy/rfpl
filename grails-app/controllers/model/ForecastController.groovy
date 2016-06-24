@@ -28,7 +28,6 @@ class ForecastController {
     @Secured('ROLE_ADMIN')
     def create() {
         Forecast forecast = new Forecast(params)
-        forecast.lastUser = getAuthenticatedUser()
         respond forecast
     }
 
@@ -56,11 +55,11 @@ class ForecastController {
 		
 		if (timeIsOver(forecast)){
 			transactionStatus.setRollbackOnly()
-			flash.message = message(code: 'forecast.error.wrongGame', args: forecast.game)
+			flash.message = message(code: 'forecast.error.timeIsOver')
             respond forecast.errors, view:'create'
             return
 		}
-
+        forecast.lastUser = getAuthenticatedUser()
         forecast.save flush:true
 
         request.withFormat {
@@ -74,7 +73,6 @@ class ForecastController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def edit(Forecast forecast) {
-        forecast.lastUser = getAuthenticatedUser()
         respond forecast
     }
 
@@ -102,11 +100,11 @@ class ForecastController {
 
         if (timeIsOver(forecast)){
             transactionStatus.setRollbackOnly()
-            flash.message = message(code: 'forecast.error.wrongGame', args: forecast.game)
+            flash.message = message(code: 'forecast.error.timeIsOver')
             respond forecast.errors, view:'edit'
             return
         }
-
+        forecast.lastUser = getAuthenticatedUser()
         forecast.save flush:true
 
         request.withFormat {
@@ -159,34 +157,51 @@ class ForecastController {
     @Transactional
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def createByUser () {
-        def forecast = new Forecast(user: params.user, game: params.game, lastUser: getAuthenticatedUser(),
-                score: Score.findOrSaveByFirstTeamAndSecondTeam(params.firstTeam, params.secondTeam)).save()
-        render(template: "showInGameIndex", model: [forecast: forecast])
+        def error, forecast
+        if (Game.get(params?.game?.id)?.startDate <= new Date()) {
+            error = message(code: 'forecast.error.timeIsOver')
+        } else {
+            forecast = new Forecast(user: params.user, game: params.game, lastUser: getAuthenticatedUser(),
+                    score: Score.findOrSaveByFirstTeamAndSecondTeam(params.firstTeam, params.secondTeam)).save()
+        }
+        render(template: "showInGameIndex", model: [forecast: forecast, error: error])
+
     }
 
     @Transactional
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def updateByUser(Forecast forecast) {
-        forecast.lastUser = getAuthenticatedUser()
-        forecast.save flush:true
-        render(template: "showInGameIndex", model: [forecast: forecast])
+        def error
+        if (Game.get(forecast?.game?.id)?.startDate <= new Date()) {
+            error = message(code: 'forecast.error.timeIsOver')
+        } else {
+            forecast.lastUser = getAuthenticatedUser()
+            forecast.save flush:true
+        }
+        render(template: "showInGameIndex", model: [forecast: forecast, error: error])
     }
 
     @Transactional
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def deleteByUser(Forecast forecast) {
-        forecast.delete flush:true
-        render(template: "showInGameIndex", model: [forecast: Forecast.findById(params.id), game: forecast?.game, user: getAuthenticatedUser()])
+        def error
+        if (Game.get(forecast?.game?.id)?.startDate <= new Date()) {
+            error = message(code: 'forecast.error.timeIsOver')
+        } else {
+            forecast.delete flush: true
+        }
+        render(template: "showInGameIndex", model: [forecast: Forecast.findById(params.id),
+                                                    game: forecast?.game, user: getAuthenticatedUser(), error: error])
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def showAllByGame(){
         if (!params.game.id) {
-            flash.message = "Не задан матч"
-            return
+            notFound()
+        } else {
+            def game = Game.get(params.game.id)
+            [forecasts: game?.startDate <= new Date() ? Forecast.findAllByGame(game).sort { -it.getBall() } : null]
         }
-        def game = Game.get(params.game.id)
-        [forecasts: game?.startDate <= new Date() ? Forecast.findAllByGame(game).sort{ -it.getBall()} : null]
     }
 
     private boolean timeIsOver(Forecast forecast) {
