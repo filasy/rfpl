@@ -38,7 +38,7 @@
                             <g:message code="game.firstTeam.label" default="First Team" />
                             <span class="required-indicator">*</span>
                         </label>
-                        <g:select id="firstTeam" name="firstTeam.id" from="${model.Team.list()}" optionKey="id" required="" value="${game?.firstTeam?.id}" class="many-to-one"/>
+                        <g:select id="firstTeam" name="firstTeam.id" from="${model.Team.findAllByLocked(false)}" optionKey="id" required="" value="${game?.firstTeam?.id}" class="many-to-one"/>
                     </div>
 
                     <div class="fieldcontain ${hasErrors(bean: game, field: 'secondTeam', 'error')} required">
@@ -46,14 +46,14 @@
                             <g:message code="game.secondTeam.label" default="Second Team" />
                             <span class="required-indicator">*</span>
                         </label>
-                        <g:select id="secondTeam" name="secondTeam.id" from="${model.Team.list()}" optionKey="id" required="" value="${game?.secondTeam?.id}" class="many-to-one"/>
+                        <g:select id="secondTeam" name="secondTeam.id" from="${model.Team.findAllByLocked(false)}" optionKey="id" required="" value="${game?.secondTeam?.id}" class="many-to-one"/>
                     </div>
                     <div class="fieldcontain ${hasErrors(bean: game, field: 'startDate', 'error')} required">
                         <label for="startDate">
                             <g:message code="game.startDate.label" default="Start Date" />
                             <span class="required-indicator">*</span>
                         </label>
-                        <g:datePicker name="startDate" precision="minute"  value="${game?.startDate}" years="${new Date().getYear()+1900}" />
+                        <g:datePicker name="startDate" precision="minute"  value="${new Date()}" years="${new Date().getYear()+1900}" />
                     </div>
                 </fieldset>
                 <fieldset class="buttons">

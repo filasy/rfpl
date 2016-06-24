@@ -41,9 +41,9 @@ class BootStrap {
         def adminRole = new Role('ROLE_ADMIN').save(flush:true)
         def userRole = new Role('ROLE_USER').save(flush:true)
 
-        def testUser = new Gamer('admin', 'sukanasos','Admin').save(flush:true)
+        def testUser = new Gamer('admin', 'admin','Admin').save(flush:true)
         UserRole.create(testUser, adminRole, true)
-        testUser = new Gamer('Pirogov1', '0723', 'Евгений П').save(flush:true)
+        testUser = new Gamer('Pirogov12', '12', 'Евгений П').save(flush:true)
         UserRole.create(testUser, userRole, true)
         testUser = new Gamer('Andrey131', '141', 'Андрей').save(flush:true)
         UserRole.create(testUser, userRole, true)

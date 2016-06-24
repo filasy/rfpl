@@ -1,3 +1,4 @@
+<div style="overflow-x: scroll">
 <table>
     <thead>
     <tr>
@@ -34,6 +35,7 @@
     </g:each>
     </tbody>
 </table>
+</div>
 %{--<div class="pagination">--}%
     %{--<g:paginate total="${count ?: 0}"/>--}%
 %{--</div>--}%

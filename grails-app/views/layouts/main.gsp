@@ -38,6 +38,18 @@
                             </ul>
                         </li>
                     </sec:ifLoggedIn>
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+                                    <li class="controller">
+                                        <g:link controller="${c.logicalPropertyName}">${c.name}</g:link>
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </li>
+                    </sec:ifAnyGranted>
                     %{--<g:pageProperty name="page.nav" />--}%
                 </ul>
             </div>

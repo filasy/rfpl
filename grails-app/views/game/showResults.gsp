@@ -27,7 +27,7 @@
         <g:submitButton name="search" value="Найти"/>
     </g:formRemote>
 
-    <div class="scrollable" id="result">
+    <div id="result">
         <g:render template="showAjax" model="[games: games, users: users, rank:rank]" />
     </div>
 </div>
