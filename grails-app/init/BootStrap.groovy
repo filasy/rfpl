@@ -13,6 +13,7 @@ class BootStrap {
     def init = { servletContext ->
         environments {
             production {
+                changeUserInfo("Michael", "mlyubyat", "5365242")
             }
 
             development {
@@ -94,8 +95,8 @@ class BootStrap {
     void createRankAndRound(){
        def rank = new Rank(name: "Евро 2016")
                 .addToUsers(Gamer.findByUsername('admin'))
-                .addToUsers(Gamer.findByUsername('Pirogov563'))
-                .addToUsers(Gamer.findByUsername('Daniil926'))
+                .addToUsers(Gamer.findByUsername('Pirogov1'))
+                .addToUsers(Gamer.findByUsername('Evgeny316'))
                 .addToUsers(Gamer.findByUsername('Sergey286'))
                 .addToUsers(Gamer.findByUsername('Pavel749'))
                 .addToUsers(Gamer.findByUsername('Alexander582'))
