@@ -14,13 +14,16 @@
 </div>
 <div id="list-game" class="content scaffold-list" role="main">
     <h1>
-        <g:message code="game.showResult.label" args="[rank]"/>, <g:message code="game.showResult.infoMessage" args="${new Date()}"/>
+        <g:message code="game.showResult.label" args="[rank]"/>
+        <font color="#a9a9a9">
+            <g:message code="game.showResult.infoMessage" args="${new Date()}"/>
+        </font>
     </h1>
 
     <g:formRemote class="message" name="search-for"
                   url="[controller:'game', action:'showResultsAjax', params: [id :rank.id]]"
                   update="result">
-        <g:select id="user" name="user" from="${rank.getUsers()}" optionKey="id" value="" noSelection="['':'-Все игроки-']" />
+        <g:select id="user" name="user" from="${rank.getUsers().findAll {!it.isAdmin()}}" optionKey="id" value="" noSelection="['':'-Все игроки-']" />
         <g:submitButton name="search" value="Найти"/>
     </g:formRemote>
 

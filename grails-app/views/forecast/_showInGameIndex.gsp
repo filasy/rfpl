@@ -1,3 +1,6 @@
+<font color="red">
+    ${error}
+</font>
 <g:if test="${!forecast}">
     <g:if test="${game?.startDate > new Date()}">
         <g:set var="update" value="${'for'.plus(game?.id)}"/>
@@ -11,8 +14,9 @@
     </g:if>
 </g:if>
 <g:elseif test="${forecast.game?.startDate <= new Date()}">
-    ${forecast?.score}
-</g:elseif><g:else>
+    ${forecast?.score} (${forecast?.getBall()})
+</g:elseif>
+<g:else>
     <g:set var="update" value="${'for'.plus(forecast.game.id)}"/>
         <g:remoteLink controller="forecast"
                       action="edit"

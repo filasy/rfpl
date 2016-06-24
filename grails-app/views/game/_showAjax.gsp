@@ -21,9 +21,9 @@
                 <td>
                     <g:if test="${forecast}">
                         <g:if test="${forecast?.lastUpdated > game?.startDate}">
-                            <font color="#a9a9a9">
+                            %{--<font color="#a9a9a9">--}%
                                 ${forecast?.score} (${forecast?.getBall()})
-                            </font>
+                            %{--</font>--}%
                         </g:if><g:else>
                                 ${forecast?.score} (${forecast?.getBall()})
                     </g:else>

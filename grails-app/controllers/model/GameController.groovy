@@ -17,32 +17,35 @@ class GameController {
     def index(Integer max) {
 	    params.max = Math.min(max ?: 10, 100)
         def date = params.date ?: new Date()
-        def startDate = date - 7
-        def endDate = date + 7
-
-        respond Game.findAllByStartDateBetweenAndRankInList( startDate, endDate,
-                    getAuthenticatedUser().ranks, params),
-                model:[gameCount: Game.findAllByStartDateBetweenAndRankInList(startDate, endDate,
-                       getAuthenticatedUser().ranks).size(),
-                       date: date, user: getAuthenticatedUser()]
+        def startDate = date - 3
+        def endDate = date + 3
+        def list = Game.findAllByStartDateBetweenAndRankInList(startDate, endDate, getAuthenticatedUser().ranks)
+//        respond Game.findAllByStartDateBetweenAndRankInList( startDate, endDate,
+//                    getAuthenticatedUser().ranks, params),
+//                model:[gameCount: Game.findAllByStartDateBetweenAndRankInList(startDate, endDate,
+//                       getAuthenticatedUser().ranks).size(),
+//                       date: date, user: getAuthenticatedUser()]
+        respond list, model:[gameCount: list.size(), date: date, user: getAuthenticatedUser()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def showResults(Integer max){
-        params.max = Math.min(max ?: 8, 100)
+//        params.max = Math.min(max ?: 8, 100)
         def rank = Rank.get(params.id)
         if (rank) {
             [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
 //             count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
-             users: Gamer.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
+             users: Gamer.get(params.user) ?: rank?.getUsers().findAll {!it.isAdmin()}.sort{-it.getBallByRank(rank)},
              rank: rank
              ]
+        } else {
+            notFound()
         }
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def showResultsAjax(Integer max){
-        params.max = Math.min(max ?: 8, 100)
+//        params.max = Math.min(max ?: 8, 100)
         def rank = Rank.get(params.id)
         if (rank) {
             render(template: "showAjax",
@@ -50,6 +53,8 @@ class GameController {
 //                            count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
                             users: Gamer.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
                             rank: rank])
+        } else {
+            notFound()
         }
     }
 

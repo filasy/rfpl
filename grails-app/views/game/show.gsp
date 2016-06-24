@@ -48,7 +48,10 @@
                     <span id="forecasts-label" class="property-label"><g:message code="game.forecasts.label" default="Score" /></span>
                         <g:each in="${game?.forecasts.sort{ -it.getBall()}}" var="forecast" status="i" >
                                 <span class="property-value" aria-labelledby="forecast${i}-label">
-                                    <g:formatDate format="dd.MM.yy HH:mm" date="${forecast.lastUpdated}"/> (${forecast.getBall()}) ${forecast.score} ${forecast.user}
+                                    <font color="#a9a9a9">
+                                        <g:formatDate format="dd.MM.yy HH:mm" date="${forecast.lastUpdated}"/>
+                                    </font>
+                                     (${forecast.getBall()}) ${forecast.score} ${forecast.user}
                                 </span>
                         </g:each>
                     </li>
