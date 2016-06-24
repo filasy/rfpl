@@ -12,7 +12,8 @@
 </g:if>
 %{--<g:elseif test="${forecast.game?.startDate <= new Date()}">--}%
     %{--${forecast?.score}--}%
-</g:elseif><g:else>
+%{--</g:elseif>--}%
+<g:else>
     <g:set var="update" value="${'for'.plus(forecast.game.id)}"/>
         <g:remoteLink controller="forecast"
                       action="edit"
