@@ -88,10 +88,8 @@ class Gamer implements Serializable, Comparable {
 
 	int getBallByRank(Rank rank) {
 		def result = 0
-		Forecast.findAllByUser(this).each {
-			if (it.game.rank.id == rank.id) {
+		Forecast.findAllByUser(this).findAll {it.game.rank.id == rank.id}.each {
 				result += it.getBall()?: 0
-			}
 		}
 		return result
 	}
