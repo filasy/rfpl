@@ -13,8 +13,6 @@ class BootStrap {
     def init = { servletContext ->
         environments {
             production {
-                changeUsername("Evgeny316","Daniil926")
-                println "changeUsername"
             }
 
             development {
@@ -61,7 +59,7 @@ class BootStrap {
         UserRole.create(testUser, userRole, true)
         testUser = new Gamer('Sergey286', '296', 'Сергей').save(flush:true)
         UserRole.create(testUser, userRole, true)
-        testUser = new Gamer('Daniil926', '936', 'Евгений Кр').save(flush:true)
+        testUser = new Gamer('Evgeny316', '936', 'Евгений Кр').save(flush:true)
         UserRole.create(testUser, userRole, true)
     }
 

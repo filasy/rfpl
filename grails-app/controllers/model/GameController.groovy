@@ -17,8 +17,8 @@ class GameController {
     def index(Integer max) {
 	    params.max = Math.min(max ?: 10, 100)
         def date = params.date ?: new Date()
-        def startDate = date - 7
-        def endDate = date + 7
+        def startDate = date - 3
+        def endDate = date + 3
         def list = Game.findAllByStartDateBetweenAndRankInList(startDate, endDate, getAuthenticatedUser().ranks)
 //        respond Game.findAllByStartDateBetweenAndRankInList( startDate, endDate,
 //                    getAuthenticatedUser().ranks, params),
