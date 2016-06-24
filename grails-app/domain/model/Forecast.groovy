@@ -2,7 +2,7 @@ package model
 
 import secure.Gamer
 
-class Forecast implements Comparable{
+class Forecast implements Comparable {
     Gamer user
     Gamer lastUser
     Score score
@@ -14,7 +14,10 @@ class Forecast implements Comparable{
     static constraints = {
         user nullable: false, unique: ('game')
         game nullable: false, unique: ('user')
-        score()
+//        score()
+        score validator: { Score s, Forecast f ->
+            return f.game.startDate > new Date() || f.user.isAdmin()
+        }
         dateCreated()
         lastUpdated()
         lastUser(nullable: true)

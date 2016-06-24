@@ -158,7 +158,7 @@ class ForecastController {
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def createByUser () {
         def error, forecast
-        if (Game.get(params?.game?.id)?.startDate <= new Date()) {
+        if (Game.get(params?.game?.id)?.startDate <= new Date() && !getAuthenticatedUser().isAdmin()) {
             error = message(code: 'forecast.error.timeIsOver')
         } else {
             forecast = new Forecast(user: params.user, game: params.game, lastUser: getAuthenticatedUser(),
@@ -171,21 +171,21 @@ class ForecastController {
     @Transactional
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def updateByUser(Forecast forecast) {
-        def error
-        if (Game.get(forecast?.game?.id)?.startDate <= new Date()) {
-            error = message(code: 'forecast.error.timeIsOver')
+        if (Game.get(forecast?.game?.id)?.startDate <= new Date() && !getAuthenticatedUser().isAdmin()) {
+            render(template: "showInGameIndex", model: [forecast: null, error: message(code: 'forecast.error.timeIsOver')])
         } else {
             forecast.lastUser = getAuthenticatedUser()
             forecast.save flush:true
+            render(template: "showInGameIndex", model: [forecast])
         }
-        render(template: "showInGameIndex", model: [forecast: forecast, error: error])
+
     }
 
     @Transactional
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def deleteByUser(Forecast forecast) {
         def error
-        if (Game.get(forecast?.game?.id)?.startDate <= new Date()) {
+        if (Game.get(forecast?.game?.id)?.startDate <= new Date() && !getAuthenticatedUser().isAdmin()) {
             error = message(code: 'forecast.error.timeIsOver')
         } else {
             forecast.delete flush: true
