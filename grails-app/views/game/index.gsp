@@ -64,9 +64,9 @@
                     </tbody>
                 </table>
             </div>
-            <div class="pagination">
-                <g:paginate total="${gameCount ?: 0}" params="['date': date]"/>
-            </div>
+            %{--<div class="pagination">--}%
+                %{--<g:paginate total="${gameCount ?: 0}" params="['date': date]"/>--}%
+            %{--</div>--}%
         </div>
     <script type="text/javascript">
         function showHide(el_id) {
