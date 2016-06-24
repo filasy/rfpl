@@ -38,7 +38,7 @@ class Gamer implements Serializable, Comparable {
 	}
 
 	boolean isAdmin(){
-		return  UserRole.findByUserAndRole(this, Role.findByAuthority("ROLE_ADMIN")) != null
+		return  UserRole.exists(this.id, Role.findByAuthority("ROLE_ADMIN").id)
 	}
 
 	def beforeInsert() {

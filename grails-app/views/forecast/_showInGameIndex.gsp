@@ -1,5 +1,5 @@
 <g:if test="${!forecast}">
-    %{--<g:if test="${game?.startDate > new Date()}">--}%
+    <g:if test="${game?.startDate > new Date()}">
         <g:set var="update" value="${'for'.plus(game?.id)}"/>
         <g:formRemote name="create_forecast"
                       url="[controller:'forecast', action:'createByUser', params: ['game.id': game.id, 'user.id':user.id]]"
@@ -8,11 +8,11 @@
             <g:textField type="text" name="secondTeam" size="1"/>
             <g:submitButton name="OK"/>
         </g:formRemote>
-    %{--</g:if>--}%
+    </g:if>
 </g:if>
-%{--<g:elseif test="${forecast.game?.startDate <= new Date()}">--}%
-    %{--${forecast?.score}--}%
-%{--</g:elseif>--}%
+<g:elseif test="${forecast.game?.startDate <= new Date()}">
+    ${forecast?.score} (${forecast?.getBall()})
+</g:elseif>
 <g:else>
     <g:set var="update" value="${'for'.plus(forecast.game.id)}"/>
         <g:remoteLink controller="forecast"

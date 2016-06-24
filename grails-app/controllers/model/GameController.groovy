@@ -35,7 +35,7 @@ class GameController {
         if (rank) {
             [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
 //             count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
-             users: Gamer.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
+             users: Gamer.get(params.user) ?: rank?.getUsers().findAll {!it.isAdmin()}.sort{-it.getBallByRank(rank)},
              rank: rank
              ]
         }

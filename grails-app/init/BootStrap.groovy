@@ -13,6 +13,8 @@ class BootStrap {
     def init = { servletContext ->
         environments {
             production {
+                changeUsername("Evgeny316","Daniil326")
+                println "changeUsername"
             }
 
             development {
@@ -27,6 +29,12 @@ class BootStrap {
         }
     }
     def destroy = {
+    }
+
+    void changeUsername(String newName, String oldName){
+        def testUser = Gamer.findByUsername(oldName)
+        testUser.username = newName
+        testUser.save(flush:true)
     }
 
     void createUserRole(){

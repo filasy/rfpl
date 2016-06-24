@@ -20,7 +20,7 @@
     <g:formRemote class="message" name="search-for"
                   url="[controller:'game', action:'showResultsAjax', params: [id :rank.id]]"
                   update="result">
-        <g:select id="user" name="user" from="${rank.getUsers()}" optionKey="id" value="" noSelection="['':'-Все игроки-']" />
+        <g:select id="user" name="user" from="${rank.getUsers().findAll {!it.isAdmin()}}" optionKey="id" value="" noSelection="['':'-Все игроки-']" />
         <g:submitButton name="search" value="Найти"/>
     </g:formRemote>
 
