@@ -13,7 +13,7 @@ class BootStrap {
     def init = { servletContext ->
         environments {
             production {
-                changeUsername("Evgeny316","Daniil326")
+                changeUsername("Evgeny316","Daniil926")
                 println "changeUsername"
             }
 
