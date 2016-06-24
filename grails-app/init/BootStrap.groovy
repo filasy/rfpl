@@ -13,16 +13,6 @@ class BootStrap {
     def init = { servletContext ->
         environments {
             production {
-//                changeUserInfo("Pirogov563", "Pirogov1", "0723")
-                changeUserInfo("Sergey286", "Sergey", "286")
-                changeUserInfo("Pavel749", "Pavel", "749")
-                changeUserInfo("Alexander582", "Alexander", "582")
-                changeUserInfo("Ivan201", "Ivan", "201")
-                changeUserInfo("Alexey709", "Alexey", "709")
-                changeUserInfo("Michael675", "Michael", "675")
-                changeUserInfo("Andrey131", "Andrey", "131")
-                changeUserInfo("Evgeny522", "Evgeny1", "522")
-                changeUserInfo("Evgeny316", "Evgeny2", "316")
             }
 
             development {
