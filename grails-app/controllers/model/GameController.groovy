@@ -30,7 +30,7 @@ class GameController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def showResults(Integer max){
-        params.max = Math.min(max ?: 8, 100)
+//        params.max = Math.min(max ?: 8, 100)
         def rank = Rank.get(params.id)
         if (rank) {
             [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
@@ -38,12 +38,14 @@ class GameController {
              users: Gamer.get(params.user) ?: rank?.getUsers().findAll {!it.isAdmin()}.sort{-it.getBallByRank(rank)},
              rank: rank
              ]
+        } else {
+            notFound()
         }
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def showResultsAjax(Integer max){
-        params.max = Math.min(max ?: 8, 100)
+//        params.max = Math.min(max ?: 8, 100)
         def rank = Rank.get(params.id)
         if (rank) {
             render(template: "showAjax",
@@ -51,6 +53,8 @@ class GameController {
 //                            count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
                             users: Gamer.get(params.user) ?: rank?.getUsers().sort{-it.getBallByRank(rank)},
                             rank: rank])
+        } else {
+            notFound()
         }
     }
 
