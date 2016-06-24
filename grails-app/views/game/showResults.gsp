@@ -14,7 +14,10 @@
 </div>
 <div id="list-game" class="content scaffold-list" role="main">
     <h1>
-        <g:message code="game.showResult.label" args="[rank]"/>, <g:message code="game.showResult.infoMessage" args="${new Date()}"/>
+        <g:message code="game.showResult.label" args="[rank]"/>
+        <font color="#a9a9a9">
+            <g:message code="game.showResult.infoMessage" args="${new Date()}"/>
+        </font>
     </h1>
 
     <g:formRemote class="message" name="search-for"
