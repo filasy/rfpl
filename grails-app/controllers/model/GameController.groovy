@@ -19,12 +19,13 @@ class GameController {
         def date = params.date ?: new Date()
         def startDate = date - 7
         def endDate = date + 7
-
-        respond Game.findAllByStartDateBetweenAndRankInList( startDate, endDate,
-                    getAuthenticatedUser().ranks, params),
-                model:[gameCount: Game.findAllByStartDateBetweenAndRankInList(startDate, endDate,
-                       getAuthenticatedUser().ranks).size(),
-                       date: date, user: getAuthenticatedUser()]
+        def list = Game.findAllByStartDateBetweenAndRankInList(startDate, endDate, getAuthenticatedUser().ranks)
+//        respond Game.findAllByStartDateBetweenAndRankInList( startDate, endDate,
+//                    getAuthenticatedUser().ranks, params),
+//                model:[gameCount: Game.findAllByStartDateBetweenAndRankInList(startDate, endDate,
+//                       getAuthenticatedUser().ranks).size(),
+//                       date: date, user: getAuthenticatedUser()]
+        respond list, model:[gameCount: list.size(), date: date, user: getAuthenticatedUser()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
