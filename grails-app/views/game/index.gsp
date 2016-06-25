@@ -38,11 +38,9 @@
                             <td>
                                 <g:if test="${game?.startDate <= new Date()}">
                                     <g:set var="id_game" value="${'game'.plus(game.id)}"/>
-                                    <g:remoteLink controller="forecast"
-                                                  action="showAllByGame"
+                                    <g:remoteLink action="showFByGame"
                                                   update="${id_game}" params="['game.id':game.id]"
-                                                  onSuccess="showHide('${id_game}')">
-                                        ${game}
+                                                  onSuccess="showHide('${id_game}')">${game}
                                     </g:remoteLink>
                                     <div id="${id_game}" style="display: none;"></div>
                                 </g:if><g:else>

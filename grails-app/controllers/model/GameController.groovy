@@ -10,7 +10,7 @@ import grails.transaction.Transactional
 @Secured('ROLE_ADMIN')
 class GameController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static scaffold = Game
     def springSecurityService
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
@@ -20,21 +20,14 @@ class GameController {
         def startDate = date - 3
         def endDate = date + 3
         def list = Game.findAllByStartDateBetweenAndRankInList(startDate, endDate, getAuthenticatedUser().ranks)
-//        respond Game.findAllByStartDateBetweenAndRankInList( startDate, endDate,
-//                    getAuthenticatedUser().ranks, params),
-//                model:[gameCount: Game.findAllByStartDateBetweenAndRankInList(startDate, endDate,
-//                       getAuthenticatedUser().ranks).size(),
-//                       date: date, user: getAuthenticatedUser()]
         respond list, model:[gameCount: list.size(), date: date, user: getAuthenticatedUser()]
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
-    def showResults(Integer max){
-//        params.max = Math.min(max ?: 8, 100)
+    def showResults(){
         def rank = Rank.get(params.id)
         if (rank) {
             [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
-//             count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
              users: Gamer.get(params.user) ?: rank?.getGamers().sort{-it.getBallByRank(rank)},
              rank: rank]
         } else {
@@ -43,13 +36,11 @@ class GameController {
     }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
-    def showResultsAjax(Integer max){
-//        params.max = Math.min(max ?: 8, 100)
+    def showResultsAjax(){
         def rank = Rank.get(params.id)
         if (rank) {
-            render(template: "showAjax",
+            render(template: "showResultsAjax",
                     model: [games: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
-//                            count: Game.findAllByRankAndStartDateLessThan(rank, new Date()),
                             users: Gamer.get(params.user) ?: rank?.getGamers().sort{-it.getBallByRank(rank)},
                             rank: rank])
         } else {
@@ -63,6 +54,16 @@ class GameController {
             respond game
         } else {
             notFound()
+        }
+    }
+
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    def showFByGame(){
+        if (!params.game.id) {
+            notFound()
+        } else {
+            def game = Game.get(params.game.id)
+            [forecasts: game?.startDate <= new Date() ? game?.forecasts?.sort { -it.getBall() } : null]
         }
     }
 
@@ -98,70 +99,9 @@ class GameController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'game.label', default: 'Game'), game.id, game])
-//                redirect game
                 redirect controller: "game", action:"index", method:"GET"
             }
             '*' { respond game, [status: CREATED] }
         }
     }
-
-    def edit(Game game) {
-        respond game
-    }
-
-    @Transactional
-    def update(Game game) {
-        if (game == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (game.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond game.errors, view:'edit'
-            return
-        }
-
-        game.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'game.label', default: 'Game'), game.id])
-                redirect game
-            }
-            '*'{ respond game, [status: OK] }
-        }
-    }
-
-    @Transactional
-    def delete(Game game) {
-
-        if (game == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        game.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'game.label', default: 'Game'), game.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'game.label', default: 'Game'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
-
 }

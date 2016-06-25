@@ -19,7 +19,7 @@
 <g:else>
     <g:set var="update" value="${'for'.plus(forecast.game.id)}"/>
         <g:remoteLink controller="forecast"
-                      action="edit"
+                      action="editAjax"
                       update="${update}" params="[id :forecast.id]">
             ${forecast?.score}
         </g:remoteLink>
