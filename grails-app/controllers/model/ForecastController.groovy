@@ -174,9 +174,10 @@ class ForecastController {
         if (Game.get(forecast?.game?.id)?.startDate <= new Date() && !getAuthenticatedUser().isAdmin()) {
             render(template: "showInGameIndex", model: [forecast: null, error: message(code: 'forecast.error.timeIsOver')])
         } else {
+            println "z"
             forecast.lastUser = getAuthenticatedUser()
             forecast.save flush:true
-            render(template: "showInGameIndex", model: [forecast])
+            render(template: "showInGameIndex", model: [forecast: forecast])
         }
 
     }
