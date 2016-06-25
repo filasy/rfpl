@@ -94,7 +94,7 @@ class BootStrap {
     void createRankAndRound(){
        def rank = new Rank(name: "Евро 2016")
                 .addToUsers(Gamer.findByUsername('admin'))
-                .addToUsers(Gamer.findByUsername('Pirogov1'))
+                .addToUsers(Gamer.findByUsername('Pirogov12'))
                 .addToUsers(Gamer.findByUsername('Evgeny316'))
                 .addToUsers(Gamer.findByUsername('Sergey286'))
                 .addToUsers(Gamer.findByUsername('Pavel749'))
@@ -139,7 +139,7 @@ class BootStrap {
     }
 
     def createForecast(){
-        def forecast = new Forecast(user: Gamer.findByUsername('Pirogov563'),
+        def forecast = new Forecast(user: Gamer.findByUsername('Pirogov12'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,2)).save(flush:true)
         forecast = new Forecast(user: Gamer.findByUsername('Andrey131'),
@@ -169,7 +169,7 @@ class BootStrap {
         forecast = new Forecast(user: Gamer.findByUsername('Sergey286'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(1,0)).save(flush:true)
-        forecast = new Forecast(user: Gamer.findByUsername('Pirogov1'),
+        forecast = new Forecast(user: Gamer.findByUsername('Pirogov12'),
                 game: Game.findByFirstTeamAndSecondTeamAndRank(Team.findByName('Словакия'), Team.findByName("Англия"), Rank.findByName("Евро 2016")),
                 score: Score.findOrCreateByFirstTeamAndSecondTeam(3,0)).save(flush:true)
     }
