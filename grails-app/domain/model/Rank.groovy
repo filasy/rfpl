@@ -24,6 +24,10 @@ class Rank implements Comparable{
         sort id: "desc"
     }
 
+    SortedSet<Gamer> getGamers(){
+        return users.findAll {!it.isAdmin()}
+    }
+
     @Override
     String toString(){        
 		name?.toUpperCase()

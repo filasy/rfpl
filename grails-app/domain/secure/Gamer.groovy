@@ -3,7 +3,6 @@ package secure
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import model.Forecast
-import model.Game
 import model.Rank
 
 @EqualsAndHashCode(includes='username')
@@ -58,9 +57,9 @@ class Gamer implements Serializable, Comparable {
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		password blank: false, password: true
 		username blank: false, unique: true
 		name blank: false, unique: true
+		password blank: false, password: true
 	}
 
 	static mapping = {

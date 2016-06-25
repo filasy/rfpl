@@ -14,9 +14,8 @@ class Forecast implements Comparable {
     static constraints = {
         user nullable: false, unique: ('game')
         game nullable: false, unique: ('user')
-//        score()
         score validator: { Score s, Forecast f ->
-            return f.game.startDate > new Date() || f.user.isAdmin()
+            return f.game.startDate > new Date() || f.lastUser?.isAdmin()
         }
         dateCreated()
         lastUpdated()

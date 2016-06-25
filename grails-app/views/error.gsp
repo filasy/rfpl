@@ -8,9 +8,11 @@
     <body>
         %{--<g:if env="development">--}%
             <g:if test="${Throwable.isInstance(exception)}">
+                <h1>Произошла внутренняя ошибка. Просьба повторить попытку и в случае возникновения ошибки сообщить подробности на jFilasy@gmail.com</h1>
                 <g:renderException exception="${exception}" />
             </g:if>
             <g:elseif test="${request.getAttribute('javax.servlet.error.exception')}">
+                <h1>Произошла внутренняя ошибка. Просьба повторить попытку и в случае возникновения ошибки сообщить подробности на jFilasy@gmail.com</h1>
                 <g:renderException exception="${request.getAttribute('javax.servlet.error.exception')}" />
             </g:elseif>
             <g:else>

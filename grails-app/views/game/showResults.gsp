@@ -16,7 +16,7 @@
     <h1>
         <g:message code="game.showResult.label" args="[rank]"/>
         <font color="#a9a9a9">
-            <g:message code="game.showResult.infoMessage" args="${new Date()}"/>
+            <g:message code="game.showResult.infoMessage"/>
         </font>
     </h1>
 

@@ -37,19 +37,19 @@
                                 </g:each>
                             </ul>
                         </li>
-                    </sec:ifLoggedIn>
-                    <sec:ifAnyGranted roles="ROLE_ADMIN">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                                    <li class="controller">
-                                        <g:link controller="${c.logicalPropertyName}">${c.name}</g:link>
-                                    </li>
-                                </g:each>
+                                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+                                        <li> <g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
+                                    </g:each>
+                                </sec:ifAnyGranted>
+                                <li><a href="${createLink(controller:'gamer', action: 'changePass', id: sec.loggedInUserInfo(field: 'id'))}">Изменить пароль</a></li>
+                                <li><a href="${createLink(controller:'logout', action: 'index')}">Выход</a></li>
                             </ul>
                         </li>
-                    </sec:ifAnyGranted>
+                    </sec:ifLoggedIn>
                     %{--<g:pageProperty name="page.nav" />--}%
                 </ul>
             </div>
@@ -58,7 +58,7 @@
     <g:layoutBody/>
     <div class="footer" role="contentinfo">
         <sec:ifLoggedIn>
-            <g:link controller="logout" action="index">Выход (<sec:username/>)</g:link>
+            <a href="${createLink(controller:'logout', action: 'index')}">Выход (<sec:username/>)</a>
         </sec:ifLoggedIn>
     </div>
 
