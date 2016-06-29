@@ -19,7 +19,10 @@
             </g:if>
             <g:form action="index" class="message">
                 <g:datePicker id="date" name="date" value="${date}" default="${new Date()}" precision="day" years="${2015..2017}"/>
-                <g:submitButton name="search" value="Найти"/>
+                <g:submitButton name="search" value="Найти (+-3)"/>
+                <font color="#a9a9a9">
+                    <g:message code="game.index.filter" args="[date-3,date+3]"/>
+                </font>
             </g:form>
             <div class="scrollable">
                 <table>

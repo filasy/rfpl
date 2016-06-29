@@ -19,8 +19,8 @@ class GameController {
         def date = params.date ?: new Date()
         date.setHours(0)
         date.setMinutes(0)
-        def startDate = date - 3
-        def endDate = date + 3
+        def startDate = date.minus(3)
+        def endDate = date.plus(3)
         def list = Game.findAllByStartDateBetweenAndRankInList(startDate, endDate, getAuthenticatedUser().ranks)
         respond list, model:[gameCount: list.size(), date: date, user: getAuthenticatedUser()]
     }
