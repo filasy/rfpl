@@ -12,7 +12,11 @@ class GamerController {
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def changePass(Gamer gamer) {
-        respond gamer
+        if (gamer != getAuthenticatedUser()){
+            notFound()
+        } else {
+            respond gamer
+        }
     }
 
     @Transactional
@@ -25,9 +29,12 @@ class GamerController {
         }
 
         if (gamer != getAuthenticatedUser()){
+            println "gamer: " + gamer
+            println "getAuthenticatedUser:" + getAuthenticatedUser()
             transactionStatus.setRollbackOnly()
             flash.message = message(code: 'gamer.pswd.updated.denied.message')
             respond gamer.errors, view:'changePass'
+            return
         }
 
         if (gamer.hasErrors()) {
