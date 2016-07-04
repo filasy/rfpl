@@ -15,7 +15,7 @@ class Forecast implements Comparable {
         user nullable: false, unique: ('game')
         game nullable: false, unique: ('user')
         score validator: { Score s, Forecast f ->
-            return f.game.startDate > new Date() || f.lastUser?.isAdmin()
+            return  ((f.game.startDate > new Date() && f.user == f.lastUser) || f.lastUser?.isAdmin()) ?: ['error']
         }
         dateCreated()
         lastUpdated()
