@@ -53,4 +53,31 @@ class GamerController {
             '*'{ respond gamer, [status: OK] }
         }
     }
+
+    @Transactional
+    def save(Gamer user) {
+        if (user == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (user.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond rank.errors, view: 'create'
+            return
+        }
+
+        user.save flush: true
+
+        UserRole.create(user, Role.findByAuthority("ROLE_USER"), true)
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'gamer.label', default: 'Gamer'), user.id])
+                redirect user
+            }
+            '*' { respond user, [status: CREATED] }
+        }
+    }
 }
