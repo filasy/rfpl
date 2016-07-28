@@ -35,7 +35,6 @@
     </g:each>
     </tbody>
 </table>
+</div><div class="pagination">
+    <g:paginate total="${gameCount ?: 0}" id="${rank.id}" omitNext="true" omitPrev="true"/>
 </div>
-%{--<div class="pagination">--}%
-    %{--<g:paginate total="${count ?: 0}"/>--}%
-%{--</div>--}%
