@@ -58,6 +58,16 @@ class GameController {
         }
     }
 
+    def editTime(Game game){
+        [game: game]
+    }
+
+    def updateTime(Game game){
+        game.startDate = params.startDate
+        game.save(flush: true)
+        [game: game]
+    }
+
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def create() {
         respond new Game(params)

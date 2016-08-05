@@ -39,8 +39,8 @@
                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                             <td><g:formatDate formatName="default.date.format" date="${game?.startDate}"/></td>
                             <td>
+                                <g:set var="id_game" value="${'game'.plus(game.id)}"/>
                                 <g:if test="${game?.startDate <= new Date()}">
-                                    <g:set var="id_game" value="${'game'.plus(game.id)}"/>
                                     <g:remoteLink action="showFByGame"
                                                   update="${id_game}" params="['game.id':game.id]"
                                                   onSuccess="showHide('${id_game}')">${game}
@@ -49,7 +49,16 @@
                                 </g:if><g:else>
                                         ${game}
                                 </g:else>
-                                <sec:ifAnyGranted roles="ROLE_ADMIN"><g:link method="GET" resource="${game}"> |+|</g:link></sec:ifAnyGranted>
+                                <sec:ifAnyGranted roles="ROLE_ADMIN"><g:link method="GET" resource="${game}"> |Факт|</g:link></sec:ifAnyGranted>
+                                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                                    <div id="${"editTime_" + id_game}">
+                                        <g:remoteLink controller="game"
+                                                      action="editTime"
+                                                      update="${"editTime_"+ id_game}" params="[id :game.id]">
+                                            |Время|
+                                        </g:remoteLink>
+                                    </div>
+                                </sec:ifAnyGranted>
                             </td>
                             <td>
                                 <g:set var="forecast" value="${game.forecasts.find {it.user == user}}"/>
