@@ -6,7 +6,7 @@ import secure.Gamer
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @Secured('ROLE_ADMIN')
 class GameController {
 
