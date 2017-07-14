@@ -40,15 +40,15 @@
                             <td><g:formatDate formatName="default.date.format" date="${game?.startDate}"/></td>
                             <td>
                                 <g:set var="id_game" value="${'game'.plus(game.id)}"/>
-                                <g:if test="${game?.startDate <= new Date()}">
+                               %{-- <g:if test="${game?.startDate <= new Date()}"> --}%
                                     <g:remoteLink action="showFByGame"
                                                   update="${id_game}" params="['game.id':game.id]"
                                                   onSuccess="showHide('${id_game}')">${game}
                                     </g:remoteLink>
                                     <div id="${id_game}" style="display: none;"></div>
-                                </g:if><g:else>
-                                        ${game}
-                                </g:else>
+                                %{--</g:if><g:else> --}%
+                                %{--        ${game} --}%
+                                %{--</g:else> --}%
                                 <sec:ifAnyGranted roles="ROLE_ADMIN"><g:link method="GET" resource="${game}"> |Факт|</g:link></sec:ifAnyGranted>
                                 <sec:ifAnyGranted roles="ROLE_ADMIN">
                                     <div id="${"editTime_" + id_game}">
