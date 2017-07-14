@@ -54,7 +54,8 @@ class GameController {
             notFound()
         } else {
             def game = Game.get(params.game.id)
-            [forecasts: game?.startDate <= new Date() ? game?.forecasts?.sort { -it.getBall() } : null]
+           // [forecasts: game?.startDate <= new Date() ? game?.forecasts?.sort { -it.getBall() } : null]
+		[forecasts: game?.forecasts]
         }
     }
 
