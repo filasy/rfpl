@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Битва прогнозов</title>
+    <title>Игра прогнозов</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 </head>
 <body>
