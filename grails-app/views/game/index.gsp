@@ -61,15 +61,15 @@
                                 </sec:ifAnyGranted>
                                 %{--юзер может проставить факт--}%
                                 %{-- <g:if test="${game?.startDate >= new Date()}"> --}%                                
-                                <sec:ifAnyGranted roles="ROLE_USER">
-                                    <div id="${"editFact_" + id_game}">
-                                        <g:remoteLink controller="game"
-                                                      action="editFact"
-                                                      update="${"editFact_"+ id_game}" params="[id :game.id]">
-                                            /Факт/
-                                        </g:remoteLink>
-                                    </div>
-                                </sec:ifAnyGranted>
+                                %{--<sec:ifAnyGranted roles="ROLE_USER"> --}%
+                                %{--    <div id="${"editFact_" + id_game}"> --}%
+                                %{--        <g:remoteLink controller="game" --}%
+                                %{--                      action="editFact" --}%
+                                %{--                      update="${"editFact_"+ id_game}" params="[id :game.id]"> --}%
+                                %{--            /Факт/
+                                %{--        </g:remoteLink> --}%
+                                %{--    </div> --}%
+                                %{--</sec:ifAnyGranted> --}%
                                 %{-- </g:if> --}%
                             </td>
                             <td>
