@@ -68,6 +68,18 @@ class GameController {
         game.save(flush: true)
         [game: game]
     }
+	
+	@Secured(['ROLE_USER'])
+   	def editFact(Game game){
+        [game: game]
+    }
+	
+	@Secured(['ROLE_USER'])
+    def updateFact(Game game){
+		game?.startDate >= new Date() ? game.score = params.score        
+        game.save(flush: true)
+        [game: game]
+    }
 
     @Secured(['ROLE_ADMIN','ROLE_USER'])
     def create() {
