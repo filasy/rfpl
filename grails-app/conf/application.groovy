@@ -32,7 +32,8 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 environments {
 	production {
 		dataSource {
-			dbCreate = "update"
+			//dbCreate = "update"
+			dbCreate = "create-drop"
 			driverClassName = "org.postgresql.Driver"
 			dialect = org.hibernate.dialect.PostgreSQL9Dialect
 			uri = new URI(System.env.DATABASE_URL)
